@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123e48">
+  <meta name="description" content="Conheça as áreas de ortopedia da Clínica Artus, em Cuiabá, e agende sua consulta pela central (65) 3322-6689.">
+  <title>Clínica Artus Ortopedia | Cuiabá, MT</title>
+  <link rel="preload" href="assets/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script src="home.js" defer></script>
+  <script src="team-hover.js" defer></script>
+  <script src="assets/gsap.min.js" defer></script>
+  <script src="assets/ScrollTrigger.min.js" defer></script>
+  <script src="assets/care-stack.js" defer></script>
+</head>
+<body id="inicio">
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="#inicio" aria-label="Clínica Artus Ortopedia, início">
+        <img src="assets/logo-color.svg" alt="" width="445" height="163">
+        <img class="brand-light" src="assets/logo.svg" alt="" width="445" height="163">
+      </a>
+      <button class="menu-toggle" type="button" aria-controls="menu" aria-expanded="false" hidden>Menu <span class="menu-lines" aria-hidden="true"></span></button>
+      <nav id="menu" aria-label="Navegação principal">
+        <a href="#especialidades">Especialidades</a>
+        <a href="#clinica">A clínica</a>
+        <a href="#equipe">Equipe médica</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <a class="button button-header" href="tel:+556533226689">Agendar consulta <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="hero-scroll-stage">
+      <div class="hero-scroll-perspective">
+        <section class="hero" aria-labelledby="titulo">
+          <picture class="hero-image">
+            <source media="(max-width: 760px)" srcset="assets/hero-clinica-mobile.webp">
+            <img src="assets/hero-clinica.webp" alt="" fetchpriority="high">
+          </picture>
+          <div class="container hero-copy">
+            <p class="hero-location">Clínica Artus · Santa Rosa</p>
+            <h1 id="titulo">Ortopedia especializada<br class="hero-break"> em Cuiabá</h1>
+            <p class="hero-description">Sete ortopedistas atendem em seis áreas. A recepção ajuda você a escolher o especialista e marcar a consulta.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="tel:+556533226689">Agendar consulta <span aria-hidden="true">↗</span></a>
+              <a class="button button-secondary" href="#especialidades">Explorar especialidades <span aria-hidden="true">↓</span></a>
+            </div>
+          </div>
+        </section>
+
+        <div class="container quick-info">
+          <div class="quick-inner">
+            <div class="team-quick-card">
+              <a class="team-quick-link" href="#equipe">
+                <span class="quick-icon" aria-hidden="true"><img src="assets/quick-team.svg" alt="" width="24" height="24"></span>
+                <strong>Equipe médica</strong>
+                <span class="quick-arrow" aria-hidden="true">↗</span>
+              </a>
+              <div class="team-portraits" role="group" aria-label="Ortopedistas da Clínica Artus" hidden></div>
+              <template id="team-portrait-template">
+                <div class="hover-card" data-open="false">
+                  <button class="team-avatar" type="button" aria-expanded="false">
+                    <img alt="" width="44" height="44">
+                  </button>
+                  <div class="hover-card-position" role="tooltip" aria-hidden="true">
+                    <div class="hover-card-content">
+                      <strong></strong>
+                      <p class="hover-card-specialty"></p>
+                      <p class="hover-card-credentials"></p>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </div>
+            <a href="#clinica">
+              <span class="quick-icon" aria-hidden="true"><img src="assets/quick-clinic.svg" alt="" width="24" height="24"></span>
+              <strong>Conheça a clínica</strong><span class="quick-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a href="#contato">
+              <span class="quick-icon" aria-hidden="true"><img src="assets/quick-map.svg" alt="" width="24" height="24"></span>
+              <span><strong>Onde estamos</strong><small>Av. Egito, 95</small></span><span class="quick-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="quick-phone" href="tel:+556533226689">
+              <span class="quick-icon" aria-hidden="true"><img src="assets/quick-phone.svg" alt="" width="24" height="24"></span>
+              <span><strong>Fale com a recepção</strong><small>(65) 3322-6689</small></span>
+              <span class="quick-arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="section container" id="especialidades" aria-labelledby="areas-title">
+      <div class="section-heading" data-reveal>
+        <div><h2 id="areas-title">Especialidades</h2></div>
+        <p>Encontre o ortopedista pela região do corpo que você precisa avaliar.</p>
+      </div>
+      <div class="area-grid">
+        <a class="area-card" data-reveal href="#cuidado-cassio">
+          <span class="area-icon"><img src="assets/area-mao.svg" alt=""></span>
+          <div class="area-copy"><h3>Mão</h3><p>Mão, dedos e punho.</p></div>
+          <span class="area-preview" aria-hidden="true"><img src="assets/cassio.webp" alt="" loading="lazy" decoding="async"></span>
+        </a>
+        <a class="area-card" data-reveal href="#cuidado-lucio">
+          <span class="area-icon"><img src="assets/area-joelho.svg" alt=""></span>
+          <div class="area-copy"><h3>Joelho</h3><p>Articulação do joelho.</p></div>
+          <span class="area-preview" aria-hidden="true"><img src="assets/lucio.webp" alt="" loading="lazy" decoding="async"></span>
+        </a>
+        <a class="area-card" data-reveal href="#cuidado-renam">
+          <span class="area-icon"><img src="assets/area-quadril.svg" alt=""></span>
+          <div class="area-copy"><h3>Quadril</h3><p>Articulação do quadril e trauma ortopédico.</p></div>
+          <span class="area-preview" aria-hidden="true"><img src="assets/renam.webp" alt="" loading="lazy" decoding="async"></span>
+        </a>
+        <a class="area-card" data-reveal href="#cuidado-andre">
+          <span class="area-icon"><img src="assets/area-coluna.svg" alt=""></span>
+          <div class="area-copy"><h3>Coluna</h3><p>Coluna cervical, torácica e lombar.</p></div>
+          <span class="area-preview" aria-hidden="true"><img src="assets/andre.webp" alt="" loading="lazy" decoding="async"></span>
+        </a>
+        <a class="area-card" data-reveal href="#cuidado-valmir">
+          <span class="area-icon"><img src="assets/area-ombro.svg" alt=""></span>
+          <div class="area-copy"><h3>Ombro e cotovelo</h3><p>Articulações do ombro e do cotovelo.</p></div>
+          <span class="area-preview area-preview-pair" aria-hidden="true">
+            <img src="assets/valmir.webp" alt="" loading="lazy" decoding="async">
+            <img src="assets/luiz.webp" alt="" loading="lazy" decoding="async">
+          </span>
+        </a>
+        <a class="area-card" data-reveal href="#cuidado-ricardo">
+          <span class="area-icon"><img src="assets/area-pe.svg" alt=""></span>
+          <div class="area-copy"><h3>Pé e tornozelo</h3><p>Estruturas do pé e do tornozelo.</p></div>
+          <span class="area-preview" aria-hidden="true"><img src="assets/ricardo.webp" alt="" loading="lazy" decoding="async"></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="care-profiles" id="cuidados">
+      <div class="care-window">
+        <div class="care-zone">
+          <div class="container">
+            <article class="care-profile" tabindex="-1" id="cuidado-cassio" aria-labelledby="nome-cassio">
+              <div class="care-panel">
+                <header class="care-heading" data-reveal>
+                  <p class="care-area"><span class="area-icon"><img src="assets/area-mao.svg" alt=""></span>Mão e punho</p>
+                  <h2 id="nome-cassio">Dr. Cássio Cocate</h2>
+                </header>
+                <img class="care-photo" src="assets/acao-cassio.webp" alt="Dr. Cássio Cocate" width="1200" height="945" loading="lazy" decoding="async">
+                <div class="care-copy">
+                  <blockquote>"Em muitos casos, só o exame clínico já dá uma boa ideia do diagnóstico."</blockquote>
+                  <h3>Sinais para procurar avaliação</h3>
+                  <ul>
+                    <li>Dedo que trava e precisa da outra mão para endireitar.</li>
+                    <li>Formigamento ou perda de força nas mãos.</li>
+                    <li>Dor no punho que continua dias depois de uma queda.</li>
+                  </ul>
+                  <h3>Como ele trata</h3>
+                  <p>A avaliação define se basta acompanhar, imobilizar ou tratar. A cirurgia fica para os casos que limitam o movimento.</p>
+                  <details><summary>Toda bolinha no punho precisa ser operada?</summary><p>Não. A causa mais comum é o cisto sinovial, geralmente benigno. Quando não incomoda, muitas vezes só se acompanha.</p></details>
+                  <a class="button button-primary" href="tel:+556533226689">Agendar consulta</a>
+                </div>
+              </div>
+            </article>
+            <article class="care-profile" tabindex="-1" id="cuidado-lucio" aria-labelledby="nome-lucio">
+              <div class="care-panel">
+                <header class="care-heading" data-reveal>
+                  <p class="care-area"><span class="area-icon"><img src="assets/area-joelho.svg" alt=""></span>Joelho</p>
+                  <h2 id="nome-lucio">Dr. Lúcio Nuno</h2>
+                </header>
+                <img class="care-photo" src="assets/acao-lucio.webp" alt="Dr. Lúcio Nuno" width="1100" height="1100" loading="lazy" decoding="async">
+                <div class="care-copy">
+                  <blockquote>"Existe uma forma de tratar a articulação sem precisar de cirurgia."</blockquote>
+                  <h3>Sinais para procurar avaliação</h3>
+                  <ul>
+                    <li>Subir escadas virou um esforço.</li>
+                    <li>Dor ao caminhar algumas quadras ou ao praticar atividade física.</li>
+                    <li>Joelho inchado, com líquido na articulação.</li>
+                  </ul>
+                  <h3>Como ele trata</h3>
+                  <p>Viscossuplementação (ácido hialurônico na articulação, com anestesia local), infiltração, ondas de choque e laser, conforme o caso.</p>
+                  <details><summary>Toda infiltração é igual?</summary><p>Não. A avaliação define qual estrutura tratar e qual substância usar.</p></details>
+                  <a class="button button-primary" href="tel:+556533226689">Agendar consulta</a>
+                </div>
+              </div>
+            </article>
+            <article class="care-profile" tabindex="-1" id="cuidado-renam" aria-labelledby="nome-renam">
+              <div class="care-panel">
+                <header class="care-heading" data-reveal>
+                  <p class="care-area"><span class="area-icon"><img src="assets/area-quadril.svg" alt=""></span>Quadril</p>
+                  <h2 id="nome-renam">Dr. Renam Bumlai</h2>
+                </header>
+                <img class="care-photo" src="assets/acao-renam.webp" alt="Dr. Renam Bumlai" width="1000" height="1310" loading="lazy" decoding="async">
+                <div class="care-copy">
+                  <blockquote>"No começo, são pequenas adaptações. Quando elas se repetem, é sinal de que precisa de ajuda."</blockquote>
+                  <h3>Sinais para procurar avaliação</h3>
+                  <ul>
+                    <li>Você muda de posição ou evita movimentos para não sentir dor.</li>
+                    <li>Rigidez e perda de movimento no quadril.</li>
+                    <li>Alguém já disse que você está mancando.</li>
+                  </ul>
+                  <h3>Como ele trata</h3>
+                  <p>Primeiro medicamento, fisioterapia e mudanças de hábito. Quando isso já não controla a dor, a prótese total de quadril passa a ser uma possibilidade.</p>
+                  <details><summary>Na prótese, a articulação inteira é retirada?</summary><p>Não. Só as partes desgastadas da cabeça do fêmur e do acetábulo são substituídas. A recuperação começa logo depois, com fisioterapia.</p></details>
+                  <a class="button button-primary" href="tel:+556533226689">Agendar consulta</a>
+                </div>
+              </div>
+            </article>
+            <article class="care-profile" tabindex="-1" id="cuidado-andre" aria-labelledby="nome-andre">
+              <div class="care-panel">
+                <header class="care-heading" data-reveal>
+                  <p class="care-area"><span class="area-icon"><img src="assets/area-coluna.svg" alt=""></span>Coluna</p>
+                  <h2 id="nome-andre">Dr. André Machado</h2>
+                </header>
+                <img class="care-photo" src="assets/acao-andre.webp" alt="Dr. André Machado" width="1100" height="1100" loading="lazy" decoding="async">
+                <div class="care-copy">
+                  <blockquote>"O tratamento sempre parte de uma análise criteriosa da doença."</blockquote>
+                  <h3>Sinais para procurar avaliação</h3>
+                  <ul>
+                    <li>Dor nas costas ao ficar sentado ou de pé.</li>
+                    <li>Choque ou cãibra que desce para o braço ou a perna.</li>
+                    <li>Pernas pesadas ou formigando depois de alguns minutos de caminhada.</li>
+                  </ul>
+                  <h3>Como ele trata</h3>
+                  <p>Exercícios, fisioterapia, medicação, bloqueios e infiltrações. Quando a cirurgia é indicada, por técnica minimamente invasiva.</p>
+                  <details><summary>Estenose do canal lombar sempre precisa de cirurgia?</summary><p>Não. Depende do grau de compressão. Muitos casos se tratam com medicamento, fisioterapia e infiltração.</p></details>
+                  <a class="button button-primary" href="tel:+556533226689">Agendar consulta</a>
+                </div>
+              </div>
+            </article>
+            <article class="care-profile" tabindex="-1" id="cuidado-valmir" aria-labelledby="nome-valmir">
+              <div class="care-panel">
+                <header class="care-heading" data-reveal>
+                  <p class="care-area"><span class="area-icon"><img src="assets/area-ombro.svg" alt=""></span>Ombro e cotovelo</p>
+                  <h2 id="nome-valmir">Dr. Valmir Pagliaro</h2>
+                </header>
+                <img class="care-photo" src="assets/acao-valmir.webp" alt="Dr. Valmir Pagliaro" width="945" height="744" loading="lazy" decoding="async">
+                <div class="care-copy">
+                  <blockquote>"Talvez o problema não seja a pomada. Talvez seja chamar toda dor no ombro de bursite."</blockquote>
+                  <h3>Sinais para procurar avaliação</h3>
+                  <ul>
+                    <li>Dor no ombro que melhora com pomada ou anti-inflamatório e volta.</li>
+                    <li>Dor no cotovelo ao abrir uma porta, carregar peso ou treinar.</li>
+                    <li>Dor e limitação no ombro ou no cotovelo que atrapalham a rotina.</li>
+                  </ul>
+                  <h3>Como ele trata</h3>
+                  <p>Quando possível, tratamento conservador: infiltração guiada por ultrassom, ondas de choque, laser de alta potência e, em casos selecionados, medicina regenerativa. Quando a cirurgia é necessária, por artroscopia, com pequenos acessos.</p>
+                  <details><summary>Dor no ombro é tudo igual?</summary><p>Não. Lesões diferentes dão sintomas parecidos: impacto, lesão do manguito rotador, bursite, ombro congelado. A primeira pergunta é qual é a causa da dor.</p></details>
+                  <a class="button button-primary" href="tel:+556533226689">Agendar consulta</a>
+                </div>
+              </div>
+            </article>
+            <article class="care-profile" tabindex="-1" id="cuidado-luiz" aria-labelledby="nome-luiz">
+              <div class="care-panel">
+                <header class="care-heading" data-reveal>
+                  <p class="care-area"><span class="area-icon"><img src="assets/area-ombro.svg" alt=""></span>Ombro e cotovelo</p>
+                  <h2 id="nome-luiz">Dr. Luiz Augusto</h2>
+                </header>
+                <img class="care-photo" src="assets/acao-luiz.webp" alt="Dr. Luiz Augusto" width="782" height="661" loading="lazy" decoding="async">
+                <div class="care-copy">
+                  <blockquote>"Se você sente essas dores no ombro, deveria ficar atento."</blockquote>
+                  <h3>Sinais para procurar avaliação</h3>
+                  <ul>
+                    <li>Dor ao levantar o braço ou dificuldade para dormir sobre o ombro.</li>
+                    <li>Fraqueza ao girar o braço, travamentos ou estalos.</li>
+                    <li>Dor na lateral do cotovelo e menos força para segurar objetos.</li>
+                  </ul>
+                  <h3>Como ele trata</h3>
+                  <p>Depende da intensidade dos sintomas: controle da dor e da inflamação, fisioterapia, órteses e, em casos selecionados, infiltração. A cirurgia fica para quando o tratamento conservador não resolve.</p>
+                  <details><summary>Epicondilite sempre precisa de cirurgia?</summary><p>Não. O tratamento começa pelo conservador. A cirurgia é considerada só quando ele não resolve.</p></details>
+                  <a class="button button-primary" href="tel:+556533226689">Agendar consulta</a>
+                </div>
+              </div>
+            </article>
+            <article class="care-profile" tabindex="-1" id="cuidado-ricardo" aria-labelledby="nome-ricardo">
+              <div class="care-panel">
+                <header class="care-heading" data-reveal>
+                  <p class="care-area"><span class="area-icon"><img src="assets/area-pe.svg" alt=""></span>Pé e tornozelo</p>
+                  <h2 id="nome-ricardo">Dr. Ricardo Issaka</h2>
+                </header>
+                <img class="care-photo" src="assets/acao-ricardo.webp" alt="Dr. Ricardo Issaka" width="1200" height="1200" loading="lazy" decoding="async">
+                <div class="care-copy">
+                  <blockquote>"É um erro comum ignorar isso. Pode piorar e tirar você das atividades de que mais gosta."</blockquote>
+                  <h3>Sinais para procurar avaliação</h3>
+                  <ul>
+                    <li>Dor ao apoiar o pé.</li>
+                    <li>Rigidez pela manhã, nos primeiros passos.</li>
+                    <li>O tornozelo já não se movimenta como antes.</li>
+                  </ul>
+                  <h3>Como ele trata</h3>
+                  <p>A escolha depende do grau do problema. Muitos casos começam com tratamento conservador e ondas de choque (fascite, esporão). Cirurgia reconstrutiva quando indicada.</p>
+                  <details><summary>Todo pé com deformidade precisa de cirurgia?</summary><p>Não. Muitos casos começam com tratamento conservador.</p></details>
+                  <a class="button button-primary" href="tel:+556533226689">Agendar consulta</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="clinic" id="clinica" aria-labelledby="clinic-title">
+      <div class="container">
+        <div class="section-heading" data-reveal>
+          <div><p class="eyebrow">A estrutura</p><h2 id="clinic-title">Por dentro da Artus</h2></div>
+          <p>A Clínica Artus reúne diferentes áreas da ortopedia no mesmo endereço, no bairro Santa Rosa, em Cuiabá.</p>
+        </div>
+        <div class="clinic-gallery-stage">
+          <div class="clinic-gallery">
+            <figure class="gallery-lead" data-reveal="gallery"><img src="assets/fachada.webp" loading="lazy" alt="Jardim e fachada da Clínica Artus"><figcaption>Fachada e jardim</figcaption></figure>
+            <figure data-reveal="gallery"><img src="assets/recepcao.webp" loading="lazy" alt="Poltronas da recepção ao lado do jardim"><figcaption>Recepção</figcaption></figure>
+            <figure data-reveal="gallery"><img src="assets/consultorio.webp" loading="lazy" alt="Consultório com bancada e cadeiras azuis"><figcaption>Consultório</figcaption></figure>
+            <figure data-reveal="gallery"><img src="assets/corredor.webp" loading="lazy" alt="Corredor iluminado por janelas que dão para o jardim"><figcaption>Corredor interno</figcaption></figure>
+            <figure data-reveal="gallery"><img src="assets/espera.webp" loading="lazy" alt="Poltronas da sala de espera"><figcaption>Sala de espera</figcaption></figure>
+          </div>
+        </div>
+        <a class="inline-link" href="#contato">Endereço e como chegar <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="section container" id="equipe" aria-labelledby="team-title">
+      <div class="team-intro">
+        <div data-reveal>
+          <p class="eyebrow">Equipe médica</p>
+          <h2 id="team-title" tabindex="-1">Conheça os ortopedistas</h2>
+          <p>Agende com a equipe pela central da Artus. Se tiver dúvidas sobre qual área procurar, a recepção pode orientar você.</p>
+        </div>
+        <img data-reveal src="assets/equipe-em-pe.webp" width="1440" height="851" loading="lazy" alt="Os sete ortopedistas da Clínica Artus reunidos em pé">
+      </div>
+      <div class="team-filter" hidden>
+        <p role="status"></p>
+        <button type="button" class="reset-filter">Ver toda a equipe</button>
+      </div>
+      <div class="team-grid">
+        <article data-reveal="team" class="doctor" data-specialty="mao"><img src="assets/cassio.webp" alt="" loading="lazy"><div><p>Mão</p><h3>Dr. Cássio Cocate</h3><small>CRM-MT 6315 · RQE 2393 / 2749</small></div></article>
+        <article data-reveal="team" class="doctor" data-specialty="joelho"><img src="assets/lucio.webp" alt="" loading="lazy"><div><p>Joelho</p><h3>Dr. Lúcio Nuno Favaro Lourenço Francisco</h3><small>CRM-MT 6629 · RQE 2633</small></div></article>
+        <article data-reveal="team" class="doctor" data-specialty="quadril"><img src="assets/renam.webp" alt="" loading="lazy"><div><p>Quadril e trauma</p><h3>Dr. Renam Urt Mansur Bumlai</h3><small>CRM-MT 6858 · RQE 2621</small></div></article>
+        <article data-reveal="team" class="doctor" data-specialty="coluna"><img src="assets/andre.webp" alt="" loading="lazy"><div><p>Coluna</p><h3>Dr. André Nunes Machado</h3><small>CRM-MT 9058 · RQE 4059</small></div></article>
+        <article data-reveal="team" class="doctor doctor-luiz" data-specialty="ombro"><img src="assets/luiz.webp" alt="" loading="lazy"><div><p>Ombro e cotovelo</p><h3>Dr. Luiz Augusto Peçanha Tavares Júnior</h3><small>CRM-MT 5252 · RQE 2370</small></div></article>
+        <article data-reveal="team" class="doctor" data-specialty="ombro"><img src="assets/valmir.webp" alt="" loading="lazy"><div><p>Ombro e cotovelo</p><h3>Dr. Valmir Pagliaro Franco</h3><small>CRM-MT 6145 · RQE 3373</small></div></article>
+        <article data-reveal="team" class="doctor" data-specialty="pe"><img src="assets/ricardo.webp" alt="" loading="lazy"><div><p>Pé e tornozelo</p><h3>Dr. Ricardo Issaka</h3><small>CRM-MT 6268 · RQE 2358</small></div></article>
+      </div>
+    </section>
+
+    <section class="contact" id="contato" aria-labelledby="contact-title">
+      <div class="contact-background" aria-hidden="true"></div>
+      <div class="container contact-layout">
+        <div data-reveal>
+          <h2 id="contact-title">Agende sua consulta</h2>
+          <p>Entre em contato com a recepção da Clínica Artus.</p>
+        </div>
+        <div class="contact-details">
+          <a data-reveal href="tel:+556533226689"><span><small>Central de atendimento</small><strong>(65) 3322-6689</strong></span><span class="card-arrow" aria-hidden="true">↗</span></a>
+          <a data-reveal href="https://www.google.com/maps/search/?api=1&amp;query=Clinica%20Artus%20Ortopedia%20Cuiaba&amp;query_place_id=ChIJpUtfAgCznZMRXrrjG1MNmHU"><span><small>Ver no mapa</small><strong>Av. Egito, 95</strong><span>Santa Rosa · Cuiabá, MT</span></span><span class="card-arrow" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-layout">
+        <div class="footer-brand" data-reveal>
+          <a class="brand" href="#inicio" aria-label="Clínica Artus Ortopedia, início"><img src="assets/logo.svg" alt="" width="445" height="163"></a>
+          <p>Ortopedia em Cuiabá, com sete médicos e seis áreas de atuação.</p>
+        </div>
+        <nav class="footer-group" aria-labelledby="footer-nav-title" data-reveal>
+          <h2 id="footer-nav-title">A clínica</h2>
+          <ul>
+            <li><a href="#clinica">Estrutura</a></li>
+            <li><a href="#equipe">Equipe médica</a></li>
+            <li><a href="#especialidades">Especialidades</a></li>
+            <li><a href="#contato">Contato e localização</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-group" aria-labelledby="footer-areas-title" data-reveal>
+          <h2 id="footer-areas-title">Áreas de atuação</h2>
+          <ul>
+            <li><a href="#equipe" data-area="mao">Mão</a></li>
+            <li><a href="#equipe" data-area="joelho">Joelho</a></li>
+            <li><a href="#equipe" data-area="quadril">Quadril</a></li>
+            <li><a href="#equipe" data-area="coluna">Coluna</a></li>
+            <li><a href="#equipe" data-area="ombro">Ombro e cotovelo</a></li>
+            <li><a href="#equipe" data-area="pe">Pé e tornozelo</a></li>
+          </ul>
+        </nav>
+        <div class="footer-group" data-reveal>
+          <h2>Central de atendimento</h2>
+          <address>
+            Av. Egito, 95 · Santa Rosa<br>
+            Cuiabá, MT
+          </address>
+          <a class="footer-phone" href="tel:+556533226689">(65) 3322-6689</a>
+          <a class="footer-map" href="https://www.google.com/maps/search/?api=1&amp;query=Clinica%20Artus%20Ortopedia%20Cuiaba&amp;query_place_id=ChIJpUtfAgCznZMRXrrjG1MNmHU">Traçar rota <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="footer-map-panel" data-reveal>
+        <iframe title="Google Maps — localização da Clínica Artus" src="https://www.google.com/maps/embed?origin=mfe&amp;pb=!1m3!2m1!1sCl%C3%ADnica+Artus+Ortopedia,+Av.+Egito+95,+Cuiab%C3%A1+MT!6i16" width="1152" height="248" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <div class="footer-bottom">
+        <p>Clínica Artus Ortopedia</p>
+        <a class="inline-link" href="#inicio">Voltar ao topo <span aria-hidden="true">↑</span></a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

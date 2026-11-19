@@ -1,0 +1,17 @@
+# Dependências e builds
+node_modules/
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+.env*
+.vercel
+.DS_Store
+
+# Material interno (não faz parte da página)
+imagens-fonte/
+validacao/
+*-original.jpg
+briefing-codex-imagens.md
+conteudo-*.md
