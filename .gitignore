@@ -15,3 +15,7 @@ validacao/
 *-original.jpg
 briefing-codex-imagens.md
 conteudo-*.md
+
+# Vídeos da logo: quadros brutos e cache do HyperFrames (os arquivos finais ficam em video-logo-3d/entrega/)
+video-logo-3d/*/renders/
+.hyperframes/

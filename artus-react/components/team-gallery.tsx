@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import GsapFlipCard, { type GsapFlipCardItem } from "@/components/ui/gsap-card-flip";
 import { doctors } from "@/lib/doctors";
 
@@ -93,32 +92,11 @@ const items: GsapFlipCardItem[] = doctors.map((doctor) => {
     imagePosition: resume?.imagePosition,
     caption: `CRM-MT ${doctor.crm} · ${resume?.rqeLabel ?? `RQE ${doctor.rqe}`}`,
     cardLines: [`CRM-MT ${doctor.crm}`, `RQE ${doctor.rqe}`],
+    link: { href: `#cuidado-${doctor.id}`, label: "Ver perfil" },
   };
 });
 
 export function TeamGallery() {
-  const [focus, setFocus] = useState<{ id?: string; key: number }>({ key: 0 });
-
-  // Specialty links (home.js) dispatch "artus:area" with the area slug.
-  useEffect(() => {
-    const onArea = (event: Event) => {
-      const area = (event as CustomEvent<string>).detail;
-      const doctor = doctors.find((d) => d.area === area);
-      if (doctor) setFocus((prev) => ({ id: doctor.id, key: prev.key + 1 }));
-    };
-    // Portraits in the quick bar (TeamQuickCard) dispatch "artus:doctor" with the id.
-    const onDoctor = (event: Event) => {
-      const id = (event as CustomEvent<string>).detail;
-      if (doctors.some((d) => d.id === id)) setFocus((prev) => ({ id, key: prev.key + 1 }));
-    };
-    window.addEventListener("artus:area", onArea);
-    window.addEventListener("artus:doctor", onDoctor);
-    return () => {
-      window.removeEventListener("artus:area", onArea);
-      window.removeEventListener("artus:doctor", onDoctor);
-    };
-  }, []);
-
   return (
     <GsapFlipCard
       items={items}
@@ -135,11 +113,15 @@ export function TeamGallery() {
       rowRatio={1.15}
       rowGap={14}
       cardHint=""
-      galleryHint="Selecione o cartão de um médico para consultar o currículo completo."
+      openLabel="Ver formação"
+      galleryHint={
+        <>
+          <span className="dica-clique">Clique</span>
+          <span className="dica-toque">Toque</span> na foto de um especialista para ver a formação
+        </>
+      }
       backLabel="Ver todos"
       openHeight={620}
-      focusId={focus.id}
-      focusKey={focus.key}
     />
   );
 }

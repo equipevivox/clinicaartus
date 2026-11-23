@@ -1,13 +1,12 @@
-// Texto aprovado em conteudo-site-medicos.md.
+// Texto aprovado em conteudo-site-medicos.md. O nome de cada médico vem de lib/doctors.ts (um nome só no site).
 export const careProfiles = [
   {
     id: "cassio",
     area: "mao",
     specialty: "Mão e punho",
-    name: "Dr. Cássio Cocate",
     width: 1200,
     height: 945,
-    quote: "\"Em muitos casos, só o exame clínico já dá uma boa ideia do diagnóstico.\"",
+    quote: "“Em muitos casos, só o exame clínico já dá uma boa ideia do diagnóstico.”",
     signs: [
       "Dedo que trava e precisa da outra mão para endireitar.",
       "Formigamento ou perda de força nas mãos.",
@@ -21,10 +20,9 @@ export const careProfiles = [
     id: "lucio",
     area: "joelho",
     specialty: "Joelho",
-    name: "Dr. Lúcio Nuno",
     width: 1100,
     height: 1100,
-    quote: "\"Existe uma forma de tratar a articulação sem precisar de cirurgia.\"",
+    quote: "“Existe uma forma de tratar a articulação sem precisar de cirurgia.”",
     signs: [
       "Subir escadas virou um esforço.",
       "Dor ao caminhar algumas quadras ou ao praticar atividade física.",
@@ -38,10 +36,9 @@ export const careProfiles = [
     id: "renam",
     area: "quadril",
     specialty: "Quadril",
-    name: "Dr. Renam Bumlai",
     width: 1000,
     height: 1310,
-    quote: "\"No começo, são pequenas adaptações. Quando elas se repetem, é sinal de que precisa de ajuda.\"",
+    quote: "“No começo, são pequenas adaptações. Quando elas se repetem, é sinal de que precisa de ajuda.”",
     signs: [
       "Você muda de posição ou evita movimentos para não sentir dor.",
       "Rigidez e perda de movimento no quadril.",
@@ -55,10 +52,9 @@ export const careProfiles = [
     id: "andre",
     area: "coluna",
     specialty: "Coluna",
-    name: "Dr. André Machado",
     width: 1100,
     height: 1100,
-    quote: "\"O tratamento sempre parte de uma análise criteriosa da doença.\"",
+    quote: "“O tratamento sempre parte de uma análise criteriosa da doença.”",
     signs: [
       "Dor nas costas ao ficar sentado ou de pé.",
       "Choque ou cãibra que desce para o braço ou a perna.",
@@ -72,10 +68,9 @@ export const careProfiles = [
     id: "valmir",
     area: "ombro",
     specialty: "Ombro e cotovelo",
-    name: "Dr. Valmir Pagliaro",
     width: 945,
     height: 744,
-    quote: "\"Talvez o problema não seja a pomada. Talvez seja chamar toda dor no ombro de bursite.\"",
+    quote: "“Talvez o problema não seja a pomada. Talvez seja chamar toda dor no ombro de bursite.”",
     signs: [
       "Dor no ombro que melhora com pomada ou anti-inflamatório e volta.",
       "Dor no cotovelo ao abrir uma porta, carregar peso ou treinar.",
@@ -89,10 +84,9 @@ export const careProfiles = [
     id: "luiz",
     area: "ombro",
     specialty: "Ombro e cotovelo",
-    name: "Dr. Luiz Augusto",
     width: 782,
     height: 661,
-    quote: "\"Se você sente essas dores no ombro, deveria ficar atento.\"",
+    quote: "“Se você sente essas dores no ombro, deveria ficar atento.”",
     signs: [
       "Dor ao levantar o braço ou dificuldade para dormir sobre o ombro.",
       "Fraqueza ao girar o braço, travamentos ou estalos.",
@@ -106,10 +100,9 @@ export const careProfiles = [
     id: "ricardo",
     area: "pe",
     specialty: "Pé e tornozelo",
-    name: "Dr. Ricardo Issaka",
     width: 1200,
     height: 1200,
-    quote: "\"É um erro comum ignorar isso. Pode piorar e tirar você das atividades de que mais gosta.\"",
+    quote: "“É um erro comum ignorar isso. Pode piorar e tirar você das atividades de que mais gosta.”",
     signs: [
       "Dor ao apoiar o pé.",
       "Rigidez pela manhã, nos primeiros passos.",

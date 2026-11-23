@@ -8,6 +8,8 @@
 
 import {
   type CSSProperties,
+  type ReactNode,
+  Fragment,
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -15,6 +17,7 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
+import { MousePointerClick } from "lucide-react";
 import gsap from "gsap";
 import { Flip } from "gsap/Flip";
 import { SplitText } from "gsap/SplitText";
@@ -70,6 +73,8 @@ export interface GsapFlipCardItem {
   imagePosition?: string;
   /** Small lines under the name on the closed row (e.g. CRM, RQE). */
   cardLines?: string[];
+  /** Link exibido no currículo aberto, por exemplo para o perfil do médico. */
+  link?: { href: string; label: string };
 }
 
 export interface GsapFlipCardProps {
@@ -97,8 +102,10 @@ export interface GsapFlipCardProps {
   rowGap?: number;
   /** Small call to action under each card on the closed row. */
   cardHint?: string;
-  /** Shared instruction shown below the closed row. */
-  galleryHint?: string;
+  /** Nome acessível do botão da foto no estado fechado: "{openLabel} de {título}". */
+  openLabel?: string;
+  /** Instrução da galeria, mostrada acima da fileira fechada. */
+  galleryHint?: ReactNode;
   /** Label of the button that returns to the row. */
   backLabel?: string;
   showCounter?: boolean;
@@ -146,6 +153,7 @@ export default function GsapFlipCard({
   rowRatio = 1.15,
   rowGap = 14,
   cardHint = "Clique para ver o currículo",
+  openLabel,
   galleryHint,
   backLabel = "Ver todos",
   showCounter = true,
@@ -177,7 +185,15 @@ export default function GsapFlipCard({
   const captionTweenRef = useRef<gsap.core.Tween | null>(null);
   const captionSplitRef = useRef<SplitText | null>(null);
   const infoRef = useRef<HTMLDivElement | null>(null);
-  const labelsRef = useRef<HTMLDivElement | null>(null);
+  // Rótulos do estado fechado (um por médico, logo depois da foto no DOM): o conteúdo de cada
+  // um é medido para todos terem a altura do maior e o "Ver perfil" ficar alinhado embaixo.
+  const labelContentRefs = useRef(new Map<number, HTMLDivElement>());
+  const labelLinkRef = useRef<HTMLDivElement | null>(null);
+  // Foco: ao abrir ou trocar de médico vai para o nome; ao fechar volta ao botão que abriu.
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const focusTitleRef = useRef(false);
+  const openerIdRef = useRef<string | null>(null);
+  const restoreFocusRef = useRef(false);
   const [labelsHeight, setLabelsHeight] = useState(120);
 
   const revertCaptionSplit = useCallback(() => {
@@ -202,18 +218,29 @@ export default function GsapFlipCard({
     return () => ro.disconnect();
   }, []);
 
-  // Height of the tallest label under the closed row.
+  // Height of the tallest label under the closed row: the tallest natural content plus the link.
   useLayoutEffect(() => {
-    const el = labelsRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(() => setLabelsHeight(el.offsetHeight));
-    ro.observe(el);
+    const nodes = Array.from(labelContentRefs.current.values());
+    if (!nodes.length) return;
+    const update = () => {
+      const content = Math.max(0, ...nodes.map((node) => node.offsetHeight));
+      setLabelsHeight(content + (labelLinkRef.current?.offsetHeight ?? 0));
+    };
+    const ro = new ResizeObserver(update);
+    nodes.forEach((node) => ro.observe(node));
+    if (labelLinkRef.current) ro.observe(labelLinkRef.current);
+    update();
     return () => ro.disconnect();
   }, [stageWidth]);
 
   const registerCard = useCallback((index: number, node: HTMLButtonElement | null) => {
     if (node) cardRefs.current.set(index, node);
     else cardRefs.current.delete(index);
+  }, []);
+
+  const registerLabel = useCallback((index: number, node: HTMLDivElement | null) => {
+    if (node) labelContentRefs.current.set(index, node);
+    else labelContentRefs.current.delete(index);
   }, []);
 
   const orderedCards = useCallback(
@@ -234,9 +261,10 @@ export default function GsapFlipCard({
   const rowPad = railX;
   const cardW = Math.max(0, (stageWidth - 2 * rowPad - (rowCount - 1) * rowGap) / rowCount);
   const cardH = cardW * rowRatio;
-  const rowTop = 28;
+  // Com a instrução no topo, a fileira desce para dar lugar a ela.
+  const rowTop = galleryHint ? 64 : 28;
   const labelsTop = rowTop + cardH + 14;
-  const closedHeight = Math.round(labelsTop + labelsHeight + 28 + (galleryHint ? 24 : 0));
+  const closedHeight = Math.round(labelsTop + labelsHeight + 28);
   const stageHeight = opened ? openHeight : closedHeight;
   const infoLeft = railX + tW + Math.max(40, stageWidth * 0.05);
   const infoWidth = Math.max(0, heroX - Math.max(40, stageWidth * 0.05) - infoLeft);
@@ -263,6 +291,7 @@ export default function GsapFlipCard({
   const select = useCallback(
     (itemIndex: number) => {
       if (itemIndex === order[0] || isAnimatingRef.current) return;
+      focusTitleRef.current = true;
       if (!isMobile && opened) {
         flipStateRef.current = Flip.getState(orderedCards(), { props: "borderRadius" });
         swapRef.current = [itemIndex, order[0]];
@@ -352,6 +381,7 @@ export default function GsapFlipCard({
         vars: { duration: duration * 0.9, stagger: { each: 0.035, from: "end" } },
       };
     }
+    restoreFocusRef.current = true;
     setOpened(false);
     onClose?.();
   }, [opened, isMobile, reducedMotion, orderedCards, duration, onClose]);
@@ -360,6 +390,10 @@ export default function GsapFlipCard({
   // card; put the chosen one first, then open (Flip from the row).
   const openOn = useCallback(
     (itemIndex: number) => {
+      if (!opened) {
+        openerIdRef.current = String(items[itemIndex]?.id ?? itemIndex);
+        focusTitleRef.current = true;
+      }
       if (opened) {
         select(itemIndex);
         return;
@@ -377,7 +411,7 @@ export default function GsapFlipCard({
         return next;
       });
     },
-    [opened, order, select, open]
+    [opened, order, select, open, items]
   );
 
   // External request to bring an item forward (e.g. a specialty link).
@@ -398,6 +432,19 @@ export default function GsapFlipCard({
   }, [order, open, stageWidth]);
 
   const heroItemIndex = order[0] ?? 0;
+
+  useEffect(() => {
+    if (opened && focusTitleRef.current) {
+      focusTitleRef.current = false;
+      titleRef.current?.focus({ preventScroll: true });
+    }
+    if (!opened && restoreFocusRef.current) {
+      restoreFocusRef.current = false;
+      const id = openerIdRef.current;
+      const opener = id ? rootRef.current?.querySelector<HTMLElement>(`[data-card-id="${CSS.escape(id)}"]`) : null;
+      opener?.focus({ preventScroll: true });
+    }
+  }, [opened, heroItemIndex]);
   const heroItem = items[heroItemIndex];
   const nextCaption = heroItem?.caption;
   const activeCaption = reducedMotion ? nextCaption : shownCaption;
@@ -505,13 +552,15 @@ export default function GsapFlipCard({
   const infoBlock = (
     <>
       {itemMeta && (
-        <p data-info-line className="m-0 text-[0.8rem] font-bold" style={{ color: accent }}>
+        <p data-info-line className="m-0 text-[0.875rem] font-bold" style={{ color: accent }}>
           {itemMeta}
         </p>
       )}
       <h3
+        ref={titleRef}
+        tabIndex={-1}
         data-info-line
-        className="mt-2 mb-0 text-[clamp(1.45rem,2.4vw,2.1rem)] font-semibold leading-[1.08] tracking-[-0.03em] [text-wrap:balance]"
+        className="mt-2 mb-0 outline-none focus-visible:outline-none text-[clamp(1.45rem,2.4vw,2.1rem)] font-semibold leading-[1.08] tracking-[-0.03em] [text-wrap:balance]"
       >
         {itemTitle}
       </h3>
@@ -522,7 +571,7 @@ export default function GsapFlipCard({
       )}
       {itemDetails && itemDetails.length > 0 && (
         <div data-info-line className="mt-5">
-          <p className="m-0 text-[0.78rem] font-bold uppercase tracking-[0.06em]" style={{ color: mutedColor }}>
+          <p className="m-0 text-[0.875rem] font-bold uppercase tracking-[0.06em]" style={{ color: mutedColor }}>
             {heroItem?.detailsLabel ?? "Formação"}
           </p>
           <ul className="mt-2 mb-0 p-0 list-none grid gap-2">
@@ -539,49 +588,79 @@ export default function GsapFlipCard({
           </ul>
         </div>
       )}
+      {heroItem?.link && (
+        <a
+          data-info-line
+          href={heroItem.link.href}
+          className="mt-5 inline-flex min-h-[44px] items-center gap-2 text-[0.95rem] font-bold"
+          style={{ color: accent }}
+        >
+          {heroItem.link.label}
+          {heroItem.title && <span className="sr-only"> de {heroItem.title}</span>}
+          <span aria-hidden="true">↑</span>
+        </a>
+      )}
       <div className="mt-5" style={{ minHeight: `${1.4 * captionLines}em` }}>
-        <p ref={captionRef} className="m-0 text-[0.8rem] leading-[1.4]" style={{ color: mutedColor }}>
+        <p ref={captionRef} className="m-0 text-[0.875rem] leading-[1.4]" style={{ color: mutedColor }}>
           {activeCaption}
         </p>
       </div>
     </>
   );
 
-  const cardLabel = (item: GsapFlipCardItem) => (
+  const profileLink = (item: GsapFlipCardItem) =>
+    item.link ? (
+      <a
+        href={item.link.href}
+        onClick={(event) => event.stopPropagation()}
+        className="relative mt-auto inline-flex min-h-[44px] items-center gap-1.5 pt-1 text-[0.9375rem] font-bold"
+        style={{ color: accent }}
+      >
+        {item.link.label}
+        {item.title && <span className="sr-only"> de {item.title}</span>}
+        <span aria-hidden="true">↑</span>
+      </a>
+    ) : null;
+
+  const cardLabel = (item: GsapFlipCardItem, withLink = false) => (
     <>
       {item.meta && (
-        <p className="m-0 text-[0.74rem] font-bold leading-[1.3]" style={{ color: accent }}>
+        <p className="m-0 text-[0.875rem] font-bold leading-[1.3]" style={{ color: accent }}>
           {item.meta}
         </p>
       )}
-      <p className="mt-1 mb-0 text-[0.92rem] font-semibold leading-[1.22] tracking-[-0.01em] [text-wrap:balance]">
+      <p className="mt-1 mb-0 text-[0.95rem] font-semibold leading-[1.22] tracking-[-0.01em] [text-wrap:balance] [font-family:Figtree,_'Instrument_Sans',_Arial,_sans-serif]">
         {item.title}
       </p>
       {item.cardLines?.map((line) => (
-        <p key={line} className="mt-1 mb-0 text-[0.72rem] leading-[1.35]" style={{ color: mutedColor }}>
+        <p key={line} className="mt-1 mb-0 text-[0.875rem] leading-[1.35]" style={{ color: mutedColor }}>
           {line}
         </p>
       ))}
       {cardHint && (
         <p
-          className="mt-auto pt-2.5 mb-0 text-[0.72rem] font-semibold leading-[1.3] opacity-80 transition-opacity group-hover:opacity-100"
+          className="mt-auto pt-2.5 mb-0 text-[0.875rem] font-semibold leading-[1.3] opacity-[0.92] transition-opacity group-hover:opacity-100"
           style={{ color: accent }}
         >
           {cardHint} <span aria-hidden="true">→</span>
         </p>
       )}
+      {withLink && profileLink(item)}
     </>
   );
 
   const ariaFor = (item: GsapFlipCardItem, itemIndex: number) =>
-    [item.meta, item.title ?? item.alt ?? `Item ${itemIndex + 1}`, cardHint].filter(Boolean).join(" — ");
+    openLabel
+      ? `${openLabel} de ${item.title ?? item.alt ?? `item ${itemIndex + 1}`}`
+      : [item.meta, item.title ?? item.alt ?? `Item ${itemIndex + 1}`, cardHint].filter(Boolean).join(" — ");
 
   const closedHint = !opened && galleryHint ? (
     <p
-      className="m-0 text-center text-[0.8rem] font-normal leading-[18px]"
-      style={{ color: `color-mix(in srgb, ${mutedColor} 90%, ${backgroundColor})` }}
+      className="m-0 flex items-center justify-center gap-2 text-center text-[0.9375rem] font-medium leading-[20px]"
+      style={{ color: accentColor }}
     >
-      {galleryHint}
+      <MousePointerClick aria-hidden="true" className="dica-icone size-4 shrink-0" strokeWidth={1.8} />
+      <span>{galleryHint}</span>
     </p>
   ) : null;
 
@@ -589,12 +668,41 @@ export default function GsapFlipCard({
     <button
       type="button"
       onClick={close}
-      className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-[0.82rem] font-semibold cursor-pointer bg-transparent"
+      className="inline-flex min-h-[44px] items-center gap-2 rounded-full border px-4 py-2 text-[0.875rem] font-semibold cursor-pointer bg-transparent"
       style={{ color: accent, borderColor: "currentColor" }}
     >
       <span aria-hidden="true">←</span> {backLabel}
     </button>
   );
+
+  if (stageWidth === 0) {
+    return (
+      <div
+        ref={rootRef}
+        className={`hxs-gsap-flip-card relative w-full ${className}`}
+        style={{ background: backgroundColor, color: textColor, borderRadius: rounded }}
+      >
+        <ul className="m-0 grid list-none gap-4 p-4 [grid-template-columns:repeat(auto-fill,minmax(min(100%,150px),1fr))]">
+          {items.map((item, itemIndex) => (
+            <li key={item.id ?? itemIndex} className="flex flex-col">
+              <span
+                className="relative block w-full overflow-hidden bg-[#d8d8d4]"
+                style={{ aspectRatio: `1 / ${rowRatio}`, borderRadius: rounded * 0.75 }}
+              >
+                <img
+                  src={item.image}
+                  alt=""
+                  className="absolute inset-0 object-cover"
+                  style={{ width: "100%", height: "100%", objectPosition: item.imagePosition ?? "center 30%" }}
+                />
+              </span>
+              <span className="flex flex-1 flex-col mt-3">{cardLabel(item, true)}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
 
   if (isMobile) {
     if (!opened) {
@@ -604,14 +712,16 @@ export default function GsapFlipCard({
           className={`hxs-gsap-flip-card relative w-full ${className}`}
           style={{ background: backgroundColor, color: textColor, borderRadius: rounded }}
         >
+          {closedHint && <div className="px-4 pt-4">{closedHint}</div>}
           <div className="flex items-stretch gap-3 overflow-x-auto snap-x snap-mandatory scroll-px-4 p-4 [scrollbar-width:thin]">
             {items.map((item, itemIndex) => (
+              <div key={item.id ?? itemIndex} className="flex flex-col shrink-0 snap-start w-[min(46vw,190px)]">
               <button
-                key={item.id ?? itemIndex}
                 type="button"
+                data-card-id={String(item.id ?? itemIndex)}
                 onClick={() => openOn(itemIndex)}
                 aria-label={ariaFor(item, itemIndex)}
-                className="group flex flex-col justify-start shrink-0 snap-start w-[min(46vw,190px)] p-0 border-none bg-transparent text-left cursor-pointer [-webkit-tap-highlight-color:transparent]"
+                className="group flex flex-col justify-start w-full p-0 border-none bg-transparent text-left cursor-pointer [-webkit-tap-highlight-color:transparent]"
                 style={{ color: textColor }}
               >
                 <span
@@ -628,9 +738,10 @@ export default function GsapFlipCard({
                 </span>
                 <span className="flex flex-1 flex-col mt-3">{cardLabel(item)}</span>
               </button>
+              {profileLink(item)}
+              </div>
             ))}
           </div>
-          {closedHint && <div className="px-4 pb-4">{closedHint}</div>}
         </div>
       );
     }
@@ -644,7 +755,7 @@ export default function GsapFlipCard({
         <div className="p-4 flex flex-col gap-5">
           <div className="flex items-center justify-between gap-3">
             {showCounter && (
-              <div className="text-[0.8rem] tracking-[0.02em]" aria-live="polite">
+              <div className="text-[0.875rem] tracking-[0.02em]" aria-live="polite">
                 <span className="font-semibold">{pad(heroSlotLabel)}</span>
                 <span style={{ color: mutedColor }}> / {pad(items.length)}</span>
               </div>
@@ -731,17 +842,18 @@ export default function GsapFlipCard({
     visibility: opened ? "visible" : "hidden",
   };
 
-  const labelsStyle: CSSProperties = {
+  // Cada rótulo fica sob a sua foto e vem logo depois dela no DOM: o Tab passa por
+  // "Ver formação" e "Ver perfil" do mesmo médico antes de ir ao próximo.
+  const labelStyle = (itemIndex: number): CSSProperties => ({
     top: labelsTop,
-    left: rowPad,
-    right: rowPad,
-    gridTemplateColumns: `repeat(${rowCount}, minmax(0, 1fr))`,
-    columnGap: rowGap,
+    left: rowPad + itemIndex * (cardW + rowGap),
+    width: cardW,
+    height: labelsHeight,
     opacity: opened ? 0 : 1,
     transition: opened ? "opacity 0.15s ease" : "opacity 0.4s ease 0.35s",
     pointerEvents: opened ? "none" : undefined,
     visibility: opened ? "hidden" : "visible",
-  };
+  });
 
   return (
     <div
@@ -758,7 +870,7 @@ export default function GsapFlipCard({
     >
       {showCounter && (
         <div
-          className="absolute top-6 text-[0.85rem] tracking-[0.02em] z-60"
+          className="absolute top-6 text-[0.875rem] tracking-[0.02em] z-60"
           style={{ ...chromeStyle, left: railX }}
           aria-live="polite"
         >
@@ -785,21 +897,14 @@ export default function GsapFlipCard({
           {infoBlock}
         </div>
 
-        <div ref={labelsRef} className="absolute grid items-stretch" style={labelsStyle} aria-hidden="true">
-          {items.map((item, itemIndex) => (
-            <div key={item.id ?? itemIndex} className="group flex flex-col cursor-pointer" onClick={() => openOn(itemIndex)}>
-              {cardLabel(item)}
-            </div>
-          ))}
-        </div>
-
         {items.map((item, itemIndex) => {
           const isHero = itemIndex === heroItemIndex;
           return (
+            <Fragment key={item.id ?? itemIndex}>
             <button
-              key={item.id ?? itemIndex}
               type="button"
               ref={(n) => registerCard(itemIndex, n)}
+              data-card-id={String(item.id ?? itemIndex)}
               data-flip-id={`hxs-card-${item.id ?? itemIndex}`}
               onClick={() => openOn(itemIndex)}
               aria-label={opened ? item.title ?? item.alt ?? `Item ${itemIndex + 1}` : ariaFor(item, itemIndex)}
@@ -820,9 +925,19 @@ export default function GsapFlipCard({
                 style={{ width: "100%", height: "100%", objectPosition: item.imagePosition ?? "center 30%" }}
               />
             </button>
+            {/* Só a foto abre a formação, como diz a dica; o rótulo traz o "Ver perfil". */}
+            <div className="absolute flex flex-col" style={labelStyle(itemIndex)}>
+              <div ref={(n) => registerLabel(itemIndex, n)} className="flex flex-col">
+                {cardLabel(item)}
+              </div>
+              <div ref={itemIndex === 0 ? labelLinkRef : undefined} className="mt-auto">
+                {profileLink(item)}
+              </div>
+            </div>
+            </Fragment>
           );
         })}
-        {closedHint && <div className="absolute inset-x-4 bottom-5">{closedHint}</div>}
+        {closedHint && <div className="absolute inset-x-4 top-6">{closedHint}</div>}
       </div>
     </div>
   );

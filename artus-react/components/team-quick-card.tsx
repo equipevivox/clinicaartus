@@ -1,95 +1,30 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
+/* eslint-disable @next/next/no-img-element -- The same optimized local portraits are reused in the team section. */
 import { UsersRound } from "lucide-react";
-import HoverCard from "@/components/ui/hover-card";
 import { doctors } from "@/lib/doctors";
 
-/** Scroll to the team section, then ask the gallery to open this doctor. */
-function showResume(id: string) {
-  // Aim at the gallery itself (below the section intro), clear of the fixed header.
-  const team = document.querySelector(".hxs-gsap-flip-card") ?? document.querySelector("#equipe");
-  if (!team) return;
-  const top = team.getBoundingClientRect().top + window.scrollY - 100;
-  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let sent = false;
-  const send = () => {
-    if (sent) return;
-    sent = true;
-    window.dispatchEvent(new CustomEvent("artus:doctor", { detail: id }));
-  };
-  if (reduced) {
-    window.scrollTo({ top, behavior: "instant" });
-    send();
-    return;
-  }
-  // Open after the scroll lands so the flip is seen.
-  if (window.artusLenis) {
-    window.artusLenis.scrollTo(top, { duration: 1.1, onComplete: send });
-    window.setTimeout(send, 2000);
-    return;
-  }
-  window.addEventListener("scrollend", send, { once: true });
-  window.setTimeout(send, 1200);
-  window.scrollTo({ top, behavior: "smooth" });
-}
-
+/**
+ * Atalho "Equipe médica" da barra do hero. Os retratos são só uma prévia (decorativa, fora do
+ * Tab): o único alvo é o link inteiro, com 44px ou mais. Com o mouse, cada retrato cresce e mostra
+ * nome e área (só visual, no CSS).
+ */
 export function TeamQuickCard() {
-  const [active, setActive] = useState<string | null>(null);
-  const portraits = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function closeOnOutsidePress(event: PointerEvent) {
-      if (event.target instanceof Node && !portraits.current?.contains(event.target)) {
-        setActive(null);
-      }
-    }
-
-    function closeOnEscape(event: KeyboardEvent) {
-      if (event.key === "Escape") setActive(null);
-    }
-
-    document.addEventListener("pointerdown", closeOnOutsidePress);
-    document.addEventListener("keydown", closeOnEscape);
-    return () => {
-      document.removeEventListener("pointerdown", closeOnOutsidePress);
-      document.removeEventListener("keydown", closeOnEscape);
-    };
-  }, []);
-
   return (
     <div className="team-quick-card">
       <a className="team-quick-link" href="#equipe">
-        <span className="quick-icon" aria-hidden="true"><UsersRound strokeWidth={1.7} /></span>
-        <strong>Equipe médica</strong>
-        <span className="quick-arrow" aria-hidden="true">↗</span>
-      </a>
-      <div ref={portraits} className="team-portraits" role="group" aria-label="Ortopedistas da Clínica Artus">
-        {doctors.map((doctor) => (
-          <HoverCard
-            key={doctor.id}
-            label={doctor.name}
-            trigger={
-              // The same optimized local portrait is reused in the team section.
-              // eslint-disable-next-line @next/next/no-img-element
+        <span className="team-quick-linha">
+          <span className="quick-icon" aria-hidden="true"><UsersRound strokeWidth={1.7} /></span>
+          <strong>Equipe médica</strong>
+          <span className="quick-arrow" aria-hidden="true">↓</span>
+        </span>
+        <span className="team-portraits" aria-hidden="true">
+          {doctors.map((doctor) => (
+            <span className="team-avatar" key={doctor.id}>
               <img src={doctor.photo} alt="" width={44} height={44} />
-            }
-            open={active === doctor.id}
-            onOpenChange={(open) => {
-              if (open) setActive(doctor.id);
-              else setActive((previous) => previous === doctor.id ? null : previous);
-            }}
-            onActivate={() => {
-              setActive(null);
-              showResume(doctor.id);
-            }}
-          >
-            <strong>{doctor.name}</strong>
-            <p className="hover-card-specialty">{doctor.specialty}</p>
-            <p>CRM-MT {doctor.crm} · RQE {doctor.rqe}</p>
-          </HoverCard>
-        ))}
-      </div>
+              <span className="team-avatar-dica"><strong>{doctor.name}</strong><span>{doctor.specialty}</span></span>
+            </span>
+          ))}
+        </span>
+      </a>
     </div>
   );
 }
