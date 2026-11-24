@@ -34,7 +34,7 @@
     });
   })();
   </script>
-  <meta name="description" content="Conheça as áreas de ortopedia da Clínica Artus, em Cuiabá, e agende sua consulta pela central (65) 3322-6689.">
+  <meta name="description" content="Conheça os especialistas em Ortopedia e Traumatologia da Clínica Artus, em Cuiabá. Agende uma consulta pelo telefone ou WhatsApp (65) 3322-6689.">
   <title>Clínica Artus Ortopedia | Cuiabá, MT</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -42,6 +42,7 @@
   <link rel="stylesheet" href="styles.css">
   <script src="home.js" defer></script>
   <script src="assets/site.js" defer></script>
+  <script src="video-player.js" defer></script>
   <script src="assets/perfis.js" async></script>
 </head>
 <body id="inicio">
@@ -163,27 +164,61 @@
       </a>
       <button class="menu-toggle" type="button" aria-controls="menu" aria-expanded="false" hidden>Menu <span class="menu-lines" aria-hidden="true"></span></button>
       <nav id="menu" aria-label="Navegação principal">
-        <a href="#especialidades">Especialidades</a>
-        <a href="#clinica">A clínica</a>
-        <a href="#equipe">Equipe médica</a>
-        <a href="#contato">Contato</a>
+        <a href="#especialidades"><svg class="nav-icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>Especialidades</a>
+        <a href="#clinica"><svg class="nav-icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10 12h4"/><path d="M10 8h4"/><path d="M14 21v-3a2 2 0 0 0-4 0v3"/><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/></svg>A clínica</a>
+        <a href="#equipe"><svg class="nav-icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>Equipe médica</a>
+        <a href="#contato"><svg class="nav-icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Contato</a>
       </nav>
       <a class="button button-header" href="tel:+556533226689"><svg class="icone-tel" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span>Ligar</span><span class="visually-hidden"> para agendar</span><span class="cta-numero"><span class="visually-hidden">:</span> (65) 3322-6689</span></a>
     </div>
   </header>
+  <!-- WHATS (gerado por artus-react/scripts/gerar-whatsapp.mjs; textos em artus-react/lib/whatsapp.ts) -->
+  <div class="whats-flutuante" data-whats hidden>
+    <button type="button" class="whats-botao" aria-expanded="false" aria-controls="whats-janela"><svg class="whats-botao-icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg><span class="visually-hidden">Agendar pelo WhatsApp: escolha entre 7 especialistas</span><span class="whats-selo" aria-hidden="true">7</span></button>
+    <div class="whats-janela" id="whats-janela" role="dialog" aria-labelledby="whats-titulo" tabindex="-1">
+      <div class="whats-topo">
+        <button type="button" class="whats-voltar" hidden><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg><span class="visually-hidden">Voltar à lista de especialistas</span></button>
+        <span class="whats-topo-avatar" aria-hidden="true"><img src="assets/logo-color.svg" alt="" width="32" height="14"></span>
+        <div class="whats-topo-texto">
+          <p class="whats-topo-nome" id="whats-titulo">Clínica Artus</p>
+          <p class="whats-topo-status">Agendamento pelo WhatsApp</p>
+        </div>
+        <button type="button" class="whats-fechar"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg><span class="visually-hidden">Fechar</span></button>
+      </div>
+      <div class="whats-conversa whats-inicio">
+        <p class="whats-balao">Olá! Escolha o especialista com quem você quer ser atendido.</p>
+        <ul class="whats-lista">
+            <li><button type="button" class="whats-opcao" data-area="mao"><span class="whats-fotos" aria-hidden="true"><img src="assets/cassio.webp" alt="" width="44" height="44" decoding="async" loading="lazy"></span><span class="whats-opcao-texto"><strong>Dr. Cássio Cocate</strong><span>Mão e punho</span></span><svg class="whats-enviar" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h14M13 6l6 6-6 6"/></svg></button></li>
+            <li><button type="button" class="whats-opcao" data-area="joelho"><span class="whats-fotos" aria-hidden="true"><img src="assets/lucio.webp" alt="" width="44" height="44" decoding="async" loading="lazy"></span><span class="whats-opcao-texto"><strong>Dr. Lúcio Nuno</strong><span>Joelho</span></span><svg class="whats-enviar" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h14M13 6l6 6-6 6"/></svg></button></li>
+            <li><button type="button" class="whats-opcao" data-area="quadril"><span class="whats-fotos" aria-hidden="true"><img src="assets/renam.webp" alt="" width="44" height="44" decoding="async" loading="lazy"></span><span class="whats-opcao-texto"><strong>Dr. Renam Bumlai</strong><span>Quadril e trauma ortopédico</span></span><svg class="whats-enviar" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h14M13 6l6 6-6 6"/></svg></button></li>
+            <li><button type="button" class="whats-opcao" data-area="coluna"><span class="whats-fotos" aria-hidden="true"><img src="assets/andre.webp" alt="" width="44" height="44" decoding="async" loading="lazy"></span><span class="whats-opcao-texto"><strong>Dr. André Nunes Machado</strong><span>Coluna</span></span><svg class="whats-enviar" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h14M13 6l6 6-6 6"/></svg></button></li>
+            <li><button type="button" class="whats-opcao" data-area="ombro"><span class="whats-fotos whats-fotos--dupla" aria-hidden="true"><img src="assets/luiz.webp" alt="" width="44" height="44" decoding="async" loading="lazy"><img src="assets/valmir.webp" alt="" width="44" height="44" decoding="async" loading="lazy"></span><span class="whats-opcao-texto"><strong>Dr. Luiz Augusto e Dr. Valmir Pagliaro</strong><span>Ombro e cotovelo</span></span><svg class="whats-enviar" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h14M13 6l6 6-6 6"/></svg></button></li>
+            <li><button type="button" class="whats-opcao" data-area="pe"><span class="whats-fotos" aria-hidden="true"><img src="assets/ricardo.webp" alt="" width="44" height="44" decoding="async" loading="lazy"></span><span class="whats-opcao-texto"><strong>Dr. Ricardo Issaka</strong><span>Pé e tornozelo</span></span><svg class="whats-enviar" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h14M13 6l6 6-6 6"/></svg></button></li>
+        </ul>
+      </div>
+      <div class="whats-chat" role="group" aria-labelledby="whats-pergunta" tabindex="-1" hidden>
+        <div class="whats-conversa"></div>
+        <form class="whats-envio">
+          <label for="whats-campo" class="visually-hidden">Descreva onde dói</label>
+          <input id="whats-campo" class="whats-campo" type="text" maxlength="300" autocomplete="off" enterkeyhint="send">
+          <button type="submit" class="whats-mandar" disabled><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.4 20.4 21 12 3.4 3.6v6.5L15 12 3.4 13.9z"/></svg><span class="visually-hidden">Enviar pelo WhatsApp (abre em nova aba)</span></button>
+        </form>
+      </div>
+      <script type="application/json" id="whats-dados">{"link":"https://wa.me/556533226689?text=","dica":"Toque numa opção ou escreva com suas palavras. Você revisa a mensagem no WhatsApp antes de enviar.","atalhos":[{"area":"mao","pergunta":"A dor é no punho ou na mão?","exemplo":"Ex.: dor no punho ao digitar","opcoes":[{"rotulo":"Punho","texto":"Dor no punho"},{"rotulo":"Mão","texto":"Dor na mão"},{"rotulo":"Nos dois","texto":"Dor na mão e no punho"}],"inicio":"Olá! Gostaria de agendar uma consulta de mão e punho."},{"area":"joelho","pergunta":"A dor é no joelho direito, no esquerdo ou nos dois?","exemplo":"Ex.: dor no joelho ao subir escadas","opcoes":[{"rotulo":"Direito","texto":"Dor no joelho direito"},{"rotulo":"Esquerdo","texto":"Dor no joelho esquerdo"},{"rotulo":"Nos dois","texto":"Dor nos dois joelhos"}],"inicio":"Olá! Gostaria de agendar uma consulta de joelho."},{"area":"quadril","pergunta":"É uma dor no quadril ou uma lesão depois de queda ou pancada?","exemplo":"Ex.: dor no quadril ao caminhar","opcoes":[{"rotulo":"Quadril","texto":"Dor no quadril"},{"rotulo":"Queda ou pancada","texto":"Lesão depois de uma queda ou pancada"}],"inicio":"Olá! Gostaria de agendar uma consulta de quadril e trauma ortopédico."},{"area":"coluna","pergunta":"Em que parte da coluna é a dor?","exemplo":"Ex.: dor na lombar que desce pela perna","opcoes":[{"rotulo":"Pescoço","texto":"Dor no pescoço"},{"rotulo":"Meio das costas","texto":"Dor no meio das costas"},{"rotulo":"Lombar","texto":"Dor na lombar"}],"inicio":"Olá! Gostaria de agendar uma consulta de coluna."},{"area":"ombro","pergunta":"A dor é no ombro ou no cotovelo?","exemplo":"Ex.: dor no ombro ao levantar o braço","opcoes":[{"rotulo":"Ombro","texto":"Dor no ombro"},{"rotulo":"Cotovelo","texto":"Dor no cotovelo"},{"rotulo":"Os dois","texto":"Dor no ombro e no cotovelo"}],"inicio":"Olá! Gostaria de agendar uma consulta de ombro e cotovelo."},{"area":"pe","pergunta":"A dor é no pé ou no tornozelo?","exemplo":"Ex.: dor no calcanhar ao acordar","opcoes":[{"rotulo":"Pé","texto":"Dor no pé"},{"rotulo":"Tornozelo","texto":"Dor no tornozelo"},{"rotulo":"Os dois","texto":"Dor no pé e no tornozelo"}],"inicio":"Olá! Gostaria de agendar uma consulta de pé e tornozelo."}]}</script>
+    </div>
+  </div>
+  <!-- /WHATS -->
 
   <main id="conteudo">
     <div class="hero-scroll-stage">
       <div class="hero-scroll-perspective">
         <section class="hero" aria-labelledby="titulo">
-          <picture class="hero-image">
-            <source media="(max-width: 760px)" srcset="assets/hero-clinica-mobile.webp">
-            <img src="assets/hero-clinica.webp" alt="" fetchpriority="high">
-          </picture>
+          <video class="hero-video" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1"><source media="(max-width: 760px)" src="assets/video/hero-clinica-mobile.mp4" type="video/mp4"><source src="assets/video/hero-clinica.mp4" type="video/mp4"></video>
+          <button class="hero-pausa" type="button" aria-pressed="false" aria-label="Pausar o vídeo de fundo" hidden><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="hero-pausa-pausar" d="M8 5h3v14H8zM13 5h3v14h-3z"/><path class="hero-pausa-tocar" d="M8 5.5v13l10.5-6.5z"/></svg></button>
           <div class="container hero-copy">
-            <p class="hero-location">Clínica Artus · Santa Rosa</p>
+            <p class="hero-location">Clínica Artus Ortopedia · Santa Rosa</p>
             <h1 id="titulo">Ortopedia especializada<br class="hero-break"> em Cuiabá</h1>
-            <p class="hero-description">Sete ortopedistas atendem em seis áreas. A recepção ajuda você a escolher o especialista e marcar a consulta.</p>
+            <p class="hero-description">Na Clínica Artus, sete especialistas em Ortopedia e Traumatologia atendem em seis áreas. A recepção ajuda você a encontrar o especialista e marcar a consulta.</p>
             <div class="hero-actions">
               <a class="button botao-whatsapp" href="https://wa.me/556533226689?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta%20na%20Cl%C3%ADnica%20Artus." target="_blank" rel="noopener"><svg class="icone-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#simbolo-whatsapp"/></svg><span>Agendar pelo WhatsApp</span><span class="visually-hidden"> (abre em nova aba)</span></a>
               <a class="button button-secondary button-ligar" href="tel:+556533226689"><svg class="icone-tel" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg><span>Ligar para agendar</span><span class="cta-numero"> (65) 3322-6689</span></a>
@@ -275,7 +310,7 @@
 
     <section class="care-profiles" id="cuidados" aria-labelledby="perfis-titulo">
       <div class="container">
-        <h2 class="care-title" id="perfis-titulo" tabindex="-1">Perfis dos ortopedistas</h2>
+        <h2 class="care-title" id="perfis-titulo" tabindex="-1">Perfis dos especialistas</h2>
         <div class="care-layout">
           <div class="care-side">
             <nav class="care-index" aria-label="Escolher ortopedista">
@@ -300,7 +335,7 @@
                 </header>
                 <div class="care-media">
                   <img class="care-photo" src="assets/acao-cassio.webp" alt="Dr. Cássio Cocate" width="1200" height="945" loading="lazy" decoding="async">
-                  <figure class="care-xray"><img src="assets/raio-x/raio-x-mao.webp" alt="Radiografia ilustrativa da mão e do punho, vista de frente" width="960" height="720" loading="lazy" decoding="async"></figure>
+                  <div class="care-xray"><figure class="care-xray-midia" role="img" aria-label="Ilustração dos ossos da mão e do punho"><video src="assets/membros/mao-punho.mp4" poster="assets/membros/mao-punho.webp" width="1080" height="1080" muted loop playsinline preload="none" aria-hidden="true"></video></figure></div>
                 </div>
                 <div class="care-copy">
                   <blockquote>“Em muitos casos, só o exame clínico já dá uma boa ideia do diagnóstico.”</blockquote>
@@ -328,7 +363,7 @@
                 </header>
                 <div class="care-media">
                   <img class="care-photo" src="assets/acao-lucio.webp" alt="Dr. Lúcio Nuno Favaro Lourenço Francisco" width="1100" height="1100" loading="lazy" decoding="async">
-                  <figure class="care-xray"><img src="assets/raio-x/raio-x-joelho.webp" alt="Radiografia ilustrativa do joelho, vista de frente" width="960" height="720" loading="lazy" decoding="async"></figure>
+                  <div class="care-xray"><figure class="care-xray-midia" role="img" aria-label="Ilustração dos ossos do joelho"><video src="assets/membros/joelho.mp4" poster="assets/membros/joelho.webp" width="1080" height="1080" muted loop playsinline preload="none" aria-hidden="true"></video></figure></div>
                 </div>
                 <div class="care-copy">
                   <blockquote>“Existe uma forma de tratar a articulação sem precisar de cirurgia.”</blockquote>
@@ -356,7 +391,7 @@
                 </header>
                 <div class="care-media">
                   <img class="care-photo" src="assets/acao-renam.webp" alt="Dr. Renam Urt Mansur Bumlai" width="1000" height="1310" loading="lazy" decoding="async">
-                  <figure class="care-xray"><img src="assets/raio-x/raio-x-quadril.webp" alt="Radiografia ilustrativa da pelve com os dois quadris, vista de frente" width="960" height="720" loading="lazy" decoding="async"></figure>
+                  <div class="care-xray"><figure class="care-xray-midia" role="img" aria-label="Ilustração da pelve e dos quadris"><video src="assets/membros/quadril.mp4" poster="assets/membros/quadril.webp" width="1080" height="1080" muted loop playsinline preload="none" aria-hidden="true"></video></figure></div>
                 </div>
                 <div class="care-copy">
                   <blockquote>“No começo, são pequenas adaptações. Quando elas se repetem, é sinal de que precisa de ajuda.”</blockquote>
@@ -384,7 +419,7 @@
                 </header>
                 <div class="care-media">
                   <img class="care-photo" src="assets/acao-andre.webp" alt="Dr. André Nunes Machado" width="1100" height="1100" loading="lazy" decoding="async">
-                  <figure class="care-xray"><img src="assets/raio-x/raio-x-coluna.webp" alt="Radiografia ilustrativa da coluna lombar, vista de lado" width="960" height="720" loading="lazy" decoding="async"></figure>
+                  <div class="care-xray"><figure class="care-xray-midia" role="img" aria-label="Ilustração da coluna vertebral"><video src="assets/membros/coluna.mp4" poster="assets/membros/coluna.webp" width="1080" height="1080" muted loop playsinline preload="none" aria-hidden="true"></video></figure></div>
                 </div>
                 <div class="care-copy">
                   <blockquote>“O tratamento sempre parte de uma análise criteriosa da doença.”</blockquote>
@@ -412,7 +447,7 @@
                 </header>
                 <div class="care-media">
                   <img class="care-photo" src="assets/acao-valmir.webp" alt="Dr. Valmir Pagliaro Franco" width="945" height="744" loading="lazy" decoding="async">
-                  <figure class="care-xray"><img src="assets/raio-x/raio-x-ombro.webp" alt="Radiografia ilustrativa do ombro, vista de frente" width="960" height="720" loading="lazy" decoding="async"></figure>
+                  <div class="care-xray"><figure class="care-xray-midia" role="img" aria-label="Ilustração dos ossos do ombro, do braço e do cotovelo"><video src="assets/membros/ombro-cotovelo.mp4" poster="assets/membros/ombro-cotovelo.webp" width="1080" height="1080" muted loop playsinline preload="none" aria-hidden="true"></video></figure></div>
                 </div>
                 <div class="care-copy">
                   <blockquote>“Talvez o problema não seja a pomada. Talvez seja chamar toda dor no ombro de bursite.”</blockquote>
@@ -440,7 +475,7 @@
                 </header>
                 <div class="care-media">
                   <img class="care-photo" src="assets/acao-luiz.webp" alt="Dr. Luiz Augusto Peçanha Tavares Júnior" width="782" height="661" loading="lazy" decoding="async">
-                  <figure class="care-xray"><img src="assets/raio-x/raio-x-cotovelo.webp" alt="Radiografia ilustrativa do cotovelo dobrado, vista de lado" width="960" height="720" loading="lazy" decoding="async"></figure>
+                  <div class="care-xray"><figure class="care-xray-midia" role="img" aria-label="Ilustração dos ossos do ombro, do braço e do cotovelo"><video src="assets/membros/ombro-cotovelo.mp4" poster="assets/membros/ombro-cotovelo.webp" width="1080" height="1080" muted loop playsinline preload="none" aria-hidden="true"></video></figure></div>
                 </div>
                 <div class="care-copy">
                   <blockquote>“Se você sente essas dores no ombro, deveria ficar atento.”</blockquote>
@@ -468,7 +503,7 @@
                 </header>
                 <div class="care-media">
                   <img class="care-photo" src="assets/acao-ricardo.webp" alt="Dr. Ricardo Issaka" width="1200" height="1200" loading="lazy" decoding="async">
-                  <figure class="care-xray"><img src="assets/raio-x/raio-x-pe.webp" alt="Radiografia ilustrativa do pé e do tornozelo, vista de lado" width="960" height="720" loading="lazy" decoding="async"></figure>
+                  <div class="care-xray"><figure class="care-xray-midia" role="img" aria-label="Ilustração dos ossos do pé e do tornozelo"><video src="assets/membros/pe-tornozelo.mp4" poster="assets/membros/pe-tornozelo.webp" width="1080" height="1080" muted loop playsinline preload="none" aria-hidden="true"></video></figure></div>
                 </div>
                 <div class="care-copy">
                   <blockquote>“É um erro comum ignorar isso. Pode piorar e tirar você das atividades de que mais gosta.”</blockquote>
@@ -543,12 +578,45 @@
           <div><h2 id="clinic-title">Por dentro da Artus</h2></div>
           <p>A Clínica Artus reúne diferentes áreas da ortopedia no mesmo endereço, no bairro Santa Rosa, em Cuiabá.</p>
         </div>
+        <div class="filme" data-filme>
+          <div class="filme-quadro">
+            <video preload="metadata" playsinline poster="assets/video/artus-institucional-capa.webp" aria-label="Vídeo institucional da Clínica Artus, com legendas">
+              <source src="assets/video/artus-institucional-720.mp4" type="video/mp4" media="(max-width: 760px)">
+              <source src="assets/video/artus-institucional.mp4" type="video/mp4">
+            </video>
+            <video class="filme-previa" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" poster="assets/video/artus-institucional-capa.webp"><source src="assets/video/artus-previa.mp4" type="video/mp4"></video>
+            <button class="filme-capa" type="button" aria-label="Assistir ao vídeo da Clínica Artus">
+              <span class="filme-capa-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8.7 7v10l8.2-5z"/></svg></span>
+            </button>
+            <span class="filme-espera" aria-hidden="true"></span>
+            <div class="filme-controles">
+              <button class="filme-botao filme-tocar" type="button" aria-label="Reproduzir">
+                <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path class="cheio" d="M7 4.5v15l12.5-7.5z"/></svg>
+                <svg class="i-pausa" viewBox="0 0 24 24" aria-hidden="true"><rect class="cheio" x="6" y="4.5" width="4" height="15" rx="1.2"/><rect class="cheio" x="14" y="4.5" width="4" height="15" rx="1.2"/></svg>
+              </button>
+              <div class="filme-linha" role="slider" tabindex="0" aria-label="Linha do tempo do vídeo" aria-valuemin="0" aria-valuemax="31" aria-valuenow="0" aria-valuetext="0:00 de 0:31">
+                <span class="filme-trilho"><span class="filme-carregado"></span><span class="filme-progresso"></span></span>
+                <span class="filme-cabeca"></span>
+                <span class="filme-dica" aria-hidden="true">0:00</span>
+              </div>
+              <span class="filme-tempo" aria-hidden="true"><span data-atual>0:00</span> / <span data-total>0:31</span></span>
+              <button class="filme-botao filme-som" type="button" aria-label="Desativar som">
+                <svg class="i-som" viewBox="0 0 24 24" aria-hidden="true"><path class="cheio" d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.8 5.2a9.5 9.5 0 0 1 0 13.6"/></svg>
+                <svg class="i-mudo" viewBox="0 0 24 24" aria-hidden="true"><path class="cheio" d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 6 6M22 9l-6 6"/></svg>
+              </button>
+              <button class="filme-botao filme-tela" type="button" aria-label="Tela cheia">
+                <svg class="i-cheia" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+                <svg class="i-sair" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
         <div class="clinic-gallery-stage">
           <div class="clinic-gallery">
             <figure class="gallery-lead"><img src="assets/fachada.webp" loading="lazy" alt="Jardim e fachada da Clínica Artus"><figcaption>Fachada e jardim</figcaption></figure>
-            <figure><img src="assets/recepcao.webp" loading="lazy" alt="Poltronas da recepção ao lado do jardim"><figcaption>Recepção</figcaption></figure>
-            <figure><img src="assets/consultorio.webp" loading="lazy" alt="Consultório com bancada e cadeiras azuis"><figcaption>Consultório</figcaption></figure>
-            <figure><img src="assets/corredor.webp" loading="lazy" alt="Corredor iluminado por janelas que dão para o jardim"><figcaption>Corredor interno</figcaption></figure>
+            <figure><img src="assets/recepcao.webp" loading="lazy" alt="Poltronas junto à parede de vidro, com vista para o jardim interno"><figcaption>Espera junto ao jardim</figcaption></figure>
+            <figure><img src="assets/consultorio.webp" loading="lazy" alt="Balcão de mármore da recepção, com cadeiras verde-petróleo"><figcaption>Recepção</figcaption></figure>
+            <figure><img src="assets/consultorio-sala.webp" loading="lazy" alt="Consultório com mesa de tampo claro, cadeira do médico e poltrona azul para o paciente"><figcaption>Consultório</figcaption></figure>
             <figure><img src="assets/espera.webp" loading="lazy" alt="Poltronas da sala de espera"><figcaption>Sala de espera</figcaption></figure>
           </div>
         </div>
@@ -556,14 +624,18 @@
       </div>
     </section>
 
-    <section class="section container" id="equipe" aria-labelledby="team-title">
-      <div class="team-intro">
-        <div>
-          <h2 id="team-title" tabindex="-1">Conheça os ortopedistas</h2>
-          <p>Agende com a equipe pela central da Artus. Se tiver dúvidas sobre qual área procurar, a recepção pode orientar você.</p>
+    <section class="section team-section" id="equipe" aria-labelledby="team-title">
+      <div class="team-hero">
+        <picture class="team-hero-foto">
+          <source media="(max-width: 760px)" srcset="assets/equipe-mobile.webp" width="980" height="1100">
+          <img src="assets/equipe-desktop.webp" srcset="assets/equipe-desktop-1280.webp 1280w, assets/equipe-desktop.webp 1920w" sizes="(max-width: 760px) 100vw, 64vw" width="1920" height="900" loading="lazy" alt="Os sete especialistas da Clínica Artus reunidos em pé">
+        </picture>
+        <div class="team-hero-texto">
+          <h2 id="team-title" tabindex="-1">Os especialistas da Clínica Artus</h2>
+          <p>Conheça a formação e a área de atuação de cada médico. Para agendar uma consulta, fale com a recepção da Artus.</p>
         </div>
-        <img src="assets/equipe-em-pe.webp" width="1440" height="851" loading="lazy" alt="Os sete ortopedistas da Clínica Artus reunidos em pé">
       </div>
+      <div class="container team-cards">
       <div class="team-grid">
         <article class="doctor"><img src="assets/cassio.webp" alt="" loading="lazy"><div><p>Mão e punho</p><h3>Dr. Cássio Cocate</h3><small>CRM-MT 6315 · RQE 2393 / 2749</small><a class="doctor-link" href="#cuidado-cassio">Ver perfil<span class="visually-hidden"> de Dr. Cássio Cocate</span> <span aria-hidden="true">↑</span></a></div></article>
         <article class="doctor"><img src="assets/lucio.webp" alt="" loading="lazy"><div><p>Joelho</p><h3>Dr. Lúcio Nuno Favaro Lourenço Francisco</h3><small>CRM-MT 6629 · RQE 2633</small><a class="doctor-link" href="#cuidado-lucio">Ver perfil<span class="visually-hidden"> de Dr. Lúcio Nuno Favaro Lourenço Francisco</span> <span aria-hidden="true">↑</span></a></div></article>
@@ -572,6 +644,7 @@
         <article class="doctor"><img src="assets/valmir.webp" alt="" loading="lazy"><div><p>Ombro e cotovelo</p><h3>Dr. Valmir Pagliaro Franco</h3><small>CRM-MT 6145 · RQE 3373</small><a class="doctor-link" href="#cuidado-valmir">Ver perfil<span class="visually-hidden"> de Dr. Valmir Pagliaro Franco</span> <span aria-hidden="true">↑</span></a></div></article>
         <article class="doctor doctor-luiz"><img src="assets/luiz.webp" alt="" loading="lazy"><div><p>Ombro e cotovelo</p><h3>Dr. Luiz Augusto Peçanha Tavares Júnior</h3><small>CRM-MT 5252 · RQE 2370</small><a class="doctor-link" href="#cuidado-luiz">Ver perfil<span class="visually-hidden"> de Dr. Luiz Augusto Peçanha Tavares Júnior</span> <span aria-hidden="true">↑</span></a></div></article>
         <article class="doctor"><img src="assets/ricardo.webp" alt="" loading="lazy"><div><p>Pé e tornozelo</p><h3>Dr. Ricardo Issaka</h3><small>CRM-MT 6268 · RQE 2358</small><a class="doctor-link" href="#cuidado-ricardo">Ver perfil<span class="visually-hidden"> de Dr. Ricardo Issaka</span> <span aria-hidden="true">↑</span></a></div></article>
+      </div>
       </div>
     </section>
 
@@ -606,64 +679,111 @@
         <div class="faq-abas" role="tablist" aria-label="Temas das perguntas">
           <button type="button" role="tab" class="faq-aba" id="faq-aba-agendamento" aria-controls="faq-painel-agendamento" aria-selected="true" tabindex="0"><span class="faq-aba-rotulo">Agendamento</span><span class="faq-aba-fundo" aria-hidden="true"></span></button>
           <button type="button" role="tab" class="faq-aba" id="faq-aba-consulta" aria-controls="faq-painel-consulta" aria-selected="false" tabindex="-1"><span class="faq-aba-rotulo">Primeira consulta</span><span class="faq-aba-fundo" aria-hidden="true"></span></button>
-          <button type="button" role="tab" class="faq-aba" id="faq-aba-especialidades" aria-controls="faq-painel-especialidades" aria-selected="false" tabindex="-1"><span class="faq-aba-rotulo">Especialidades</span><span class="faq-aba-fundo" aria-hidden="true"></span></button>
+          <button type="button" role="tab" class="faq-aba" id="faq-aba-especialidades" aria-controls="faq-painel-especialidades" aria-selected="false" tabindex="-1"><span class="faq-aba-rotulo">Especialidades e tratamentos</span><span class="faq-aba-fundo" aria-hidden="true"></span></button>
+          <button type="button" role="tab" class="faq-aba" id="faq-aba-sintomas" aria-controls="faq-painel-sintomas" aria-selected="false" tabindex="-1"><span class="faq-aba-rotulo">Sintomas e urgências</span><span class="faq-aba-fundo" aria-hidden="true"></span></button>
           <button type="button" role="tab" class="faq-aba" id="faq-aba-clinica" aria-controls="faq-painel-clinica" aria-selected="false" tabindex="-1"><span class="faq-aba-rotulo">A clínica</span><span class="faq-aba-fundo" aria-hidden="true"></span></button>
         </div>
         <div class="faq-lista">
           <div class="faq-painel ativo" role="tabpanel" id="faq-painel-agendamento" aria-labelledby="faq-aba-agendamento">
             <div class="faq-item" data-aberto="false">
               <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-agendamento-0-pergunta" aria-expanded="true" aria-controls="faq-agendamento-0-resposta"><span class="faq-pergunta-texto">Como marco uma consulta?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
-              <div class="faq-resposta" id="faq-agendamento-0-resposta" role="region" aria-labelledby="faq-agendamento-0-pergunta"><p>Pela recepção, por telefone ou WhatsApp no (65) 3322-6689. A equipe ajuda a escolher o especialista e informa os horários disponíveis.</p></div>
+              <div class="faq-resposta" id="faq-agendamento-0-resposta" role="region" aria-labelledby="faq-agendamento-0-pergunta"><p>Pelo telefone ou WhatsApp (65) 3322-6689. A recepção informa os horários disponíveis e ajuda você a escolher a área mais adequada à sua queixa.</p></div>
             </div>
             <div class="faq-item" data-aberto="false">
-              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-agendamento-1-pergunta" aria-expanded="true" aria-controls="faq-agendamento-1-resposta"><span class="faq-pergunta-texto">Não sei qual especialista procurar. O que faço?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
-              <div class="faq-resposta" id="faq-agendamento-1-resposta" role="region" aria-labelledby="faq-agendamento-1-pergunta"><p>Fale com a recepção para saber quais áreas a equipe atende e como marcar uma consulta. Informações sobre sintomas e exames podem ser conversadas com o médico na avaliação.</p></div>
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-agendamento-1-pergunta" aria-expanded="true" aria-controls="faq-agendamento-1-resposta"><span class="faq-pergunta-texto">A clínica atende convênios ou só particular?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-agendamento-1-resposta" role="region" aria-labelledby="faq-agendamento-1-pergunta"><p>A Artus atende por convênio e particular, com o mesmo tempo reservado para a consulta. Para saber se o seu plano é aceito, informe à recepção a operadora, o tipo de plano e o especialista que você quer consultar.</p></div>
             </div>
             <div class="faq-item" data-aberto="false">
-              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-agendamento-2-pergunta" aria-expanded="true" aria-controls="faq-agendamento-2-resposta"><span class="faq-pergunta-texto">A clínica atende convênios?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
-              <div class="faq-resposta" id="faq-agendamento-2-resposta" role="region" aria-labelledby="faq-agendamento-2-pergunta"><p>Os convênios aceitos e os valores das consultas são informados pela recepção, por telefone ou WhatsApp.</p></div>
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-agendamento-2-pergunta" aria-expanded="true" aria-controls="faq-agendamento-2-resposta"><span class="faq-pergunta-texto">A clínica atende crianças?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-agendamento-2-resposta" role="region" aria-labelledby="faq-agendamento-2-pergunta"><p>Não. A Artus não atua em ortopedia pediátrica. O atendimento é voltado a adultos e idosos, da medicina esportiva aos problemas degenerativos.</p></div>
+            </div>
+            <div class="faq-item" data-aberto="false">
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-agendamento-3-pergunta" aria-expanded="true" aria-controls="faq-agendamento-3-resposta"><span class="faq-pergunta-texto">Tenho dor em mais de uma articulação. Preciso marcar várias consultas?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-agendamento-3-resposta" role="region" aria-labelledby="faq-agendamento-3-pergunta"><p>Comece pela queixa que mais incomoda. Como os especialistas atendem no mesmo espaço, o médico pode encaminhar você diretamente a um colega da Artus para avaliar a outra articulação.</p></div>
             </div>
           </div>
           <div class="faq-painel" role="tabpanel" id="faq-painel-consulta" aria-labelledby="faq-aba-consulta">
             <div class="faq-item" data-aberto="false">
               <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-consulta-0-pergunta" aria-expanded="true" aria-controls="faq-consulta-0-resposta"><span class="faq-pergunta-texto">O que devo levar na primeira consulta?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
-              <div class="faq-resposta" id="faq-consulta-0-resposta" role="region" aria-labelledby="faq-consulta-0-pergunta"><p>Um documento com foto e, se tiver, exames e laudos anteriores sobre o problema, como radiografias e ressonâncias. A lista dos remédios que você usa também ajuda.</p></div>
+              <div class="faq-resposta" id="faq-consulta-0-resposta" role="region" aria-labelledby="faq-consulta-0-pergunta"><p>Um documento com foto, a carteirinha do convênio, se for o caso, e a lista dos remédios que você usa. Se tiver exames sobre a queixa, leve os laudos e as imagens, em papel ou em formato digital.</p></div>
             </div>
             <div class="faq-item" data-aberto="false">
-              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-consulta-1-pergunta" aria-expanded="true" aria-controls="faq-consulta-1-resposta"><span class="faq-pergunta-texto">Preciso fazer exames antes da consulta?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
-              <div class="faq-resposta" id="faq-consulta-1-resposta" role="region" aria-labelledby="faq-consulta-1-pergunta"><p>Se você já tiver exames relacionados ao motivo da consulta, leve os resultados. Durante a avaliação, o ortopedista orienta se é preciso fazer novos exames.</p></div>
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-consulta-1-pergunta" aria-expanded="true" aria-controls="faq-consulta-1-resposta"><span class="faq-pergunta-texto">O que vale a pena anotar antes da consulta?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-consulta-1-resposta" role="region" aria-labelledby="faq-consulta-1-pergunta"><p>Anote quando o problema começou, o que costuma piorar a dor e quais tarefas ficaram mais difíceis. Informe também se já teve lesões ou cirurgias na região.</p></div>
             </div>
             <div class="faq-item" data-aberto="false">
-              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-consulta-2-pergunta" aria-expanded="true" aria-controls="faq-consulta-2-resposta"><span class="faq-pergunta-texto">Toda dor ortopédica termina em cirurgia?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
-              <div class="faq-resposta" id="faq-consulta-2-resposta" role="region" aria-labelledby="faq-consulta-2-pergunta"><p>A indicação de cirurgia depende da causa da dor, dos sintomas e da avaliação médica. Conforme o caso, o tratamento pode incluir acompanhamento, medicação, fisioterapia ou imobilização.</p></div>
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-consulta-2-pergunta" aria-expanded="true" aria-controls="faq-consulta-2-resposta"><span class="faq-pergunta-texto">Preciso fazer raio-X ou ressonância antes da primeira consulta?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-consulta-2-resposta" role="region" aria-labelledby="faq-consulta-2-pergunta"><p>Você pode marcar a primeira consulta sem fazer exames por conta própria. O especialista avalia se precisa pedir algum exame.</p></div>
+            </div>
+            <div class="faq-item" data-aberto="false">
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-consulta-3-pergunta" aria-expanded="true" aria-controls="faq-consulta-3-resposta"><span class="faq-pergunta-texto">O que levo se quiser uma segunda opinião?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-consulta-3-resposta" role="region" aria-labelledby="faq-consulta-3-pergunta"><p>Se tiver, leve os laudos, as imagens e o que recebeu sobre o tratamento proposto. Conte ao especialista o que você já tentou e quais dúvidas ainda tem sobre a decisão.</p></div>
             </div>
           </div>
           <div class="faq-painel" role="tabpanel" id="faq-painel-especialidades" aria-labelledby="faq-aba-especialidades">
             <div class="faq-item" data-aberto="false">
-              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-especialidades-0-pergunta" aria-expanded="true" aria-controls="faq-especialidades-0-resposta"><span class="faq-pergunta-texto">Quais áreas a clínica atende?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
-              <div class="faq-resposta" id="faq-especialidades-0-resposta" role="region" aria-labelledby="faq-especialidades-0-pergunta"><p>A equipe atende mão e punho, joelho, quadril e trauma ortopédico, coluna, ombro e cotovelo, e pé e tornozelo.</p></div>
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-especialidades-0-pergunta" aria-expanded="true" aria-controls="faq-especialidades-0-resposta"><span class="faq-pergunta-texto">Quais especialistas atendem em cada área?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-especialidades-0-resposta" role="region" aria-labelledby="faq-especialidades-0-pergunta"><p>Joelho: Dr. Lúcio Nuno e Dr. Renam Bumlai. Quadril e trauma ortopédico: Dr. Renam Bumlai. Ombro e cotovelo: Dr. Luiz Tavares e Dr. Valmir Pagliaro. Pé e tornozelo: Dr. Ricardo Issaka. Mão e punho: Dr. Cássio Cocate. Coluna: Dr. André Nunes Machado.</p></div>
             </div>
             <div class="faq-item" data-aberto="false">
-              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-especialidades-1-pergunta" aria-expanded="true" aria-controls="faq-especialidades-1-resposta"><span class="faq-pergunta-texto">Quando devo procurar um ortopedista?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
-              <div class="faq-resposta" id="faq-especialidades-1-resposta" role="region" aria-labelledby="faq-especialidades-1-pergunta"><p>Procure avaliação se a dor persistir, atrapalhar seus movimentos ou vier com inchaço, formigamento ou perda de força. Se houver suspeita de fratura recente, procure um pronto-socorro.</p></div>
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-especialidades-1-pergunta" aria-expanded="true" aria-controls="faq-especialidades-1-resposta"><span class="faq-pergunta-texto">Quais tratamentos sem cirurgia a clínica oferece?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-especialidades-1-resposta" role="region" aria-labelledby="faq-especialidades-1-pergunta"><p>Além das consultas, a Artus faz procedimentos ambulatoriais como infiltração guiada por ultrassom, terapia por ondas de choque e laserterapia. O especialista indica se algum deles faz sentido para o seu caso.</p></div>
             </div>
             <div class="faq-item" data-aberto="false">
-              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-especialidades-2-pergunta" aria-expanded="true" aria-controls="faq-especialidades-2-resposta"><span class="faq-pergunta-texto">A clínica atende fraturas e outros traumas?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
-              <div class="faq-resposta" id="faq-especialidades-2-resposta" role="region" aria-labelledby="faq-especialidades-2-pergunta"><p>O Dr. Renam Urt Mansur Bumlai atua em quadril e trauma ortopédico. Para saber que atendimentos podem ser agendados, fale com a recepção. Em caso de suspeita de fratura recente, procure um pronto-socorro.</p></div>
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-especialidades-2-pergunta" aria-expanded="true" aria-controls="faq-especialidades-2-resposta"><span class="faq-pergunta-texto">Toda dor ortopédica termina em cirurgia?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-especialidades-2-resposta" role="region" aria-labelledby="faq-especialidades-2-pergunta"><p>Não. A indicação depende da causa da dor, dos sintomas e da avaliação médica. Conforme o caso, o tratamento pode incluir acompanhamento, medicação, fisioterapia, imobilização ou procedimentos ambulatoriais.</p></div>
+            </div>
+            <div class="faq-item" data-aberto="false">
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-especialidades-3-pergunta" aria-expanded="true" aria-controls="faq-especialidades-3-resposta"><span class="faq-pergunta-texto">Se eu precisar de cirurgia, onde ela é feita?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-especialidades-3-resposta" role="region" aria-labelledby="faq-especialidades-3-pergunta"><p>Todos os médicos sócios da Artus são cirurgiões ortopedistas. As cirurgias, como videoartroscopias e reconstruções articulares, são feitas em hospitais de Cuiabá. Antes de agendar, confirme com a recepção o hospital previsto e, se for usar convênio, verifique a cobertura com a operadora.</p></div>
+            </div>
+          </div>
+          <div class="faq-painel" role="tabpanel" id="faq-painel-sintomas" aria-labelledby="faq-aba-sintomas">
+            <div class="faq-item" data-aberto="false">
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-sintomas-0-pergunta" aria-expanded="true" aria-controls="faq-sintomas-0-resposta"><span class="faq-pergunta-texto">Meu joelho dói ao subir escadas. Quando vale marcar uma consulta?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-sintomas-0-resposta" role="region" aria-labelledby="faq-sintomas-0-pergunta"><p>Se a dor volta com frequência ou faz você evitar escadas e outras tarefas, procure avaliação. Vale contar se também há inchaço ou se o joelho trava ou falha.</p></div>
+            </div>
+            <div class="faq-item" data-aberto="false">
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-sintomas-1-pergunta" aria-expanded="true" aria-controls="faq-sintomas-1-resposta"><span class="faq-pergunta-texto">Minha mão formiga à noite. O que devo contar na consulta?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-sintomas-1-resposta" role="region" aria-labelledby="faq-sintomas-1-pergunta"><p>Se o formigamento se repete ou atrapalha o sono, procure avaliação. Conte quais dedos formigam e se você percebe dificuldade para segurar objetos.</p></div>
+            </div>
+            <div class="faq-item" data-aberto="false">
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-sintomas-2-pergunta" aria-expanded="true" aria-controls="faq-sintomas-2-resposta"><span class="faq-pergunta-texto">A dor lombar desce pela perna. Quando devo procurar ajuda?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-sintomas-2-resposta" role="region" aria-labelledby="faq-sintomas-2-pergunta"><p>Procure avaliação se a dor persiste ou atrapalha sua rotina. Vá ao pronto-socorro se aparecer dificuldade nova para urinar, perda do controle da urina ou das fezes, dormência entre as pernas ou perda de força que está piorando.</p></div>
+            </div>
+            <div class="faq-item" data-aberto="false">
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-sintomas-3-pergunta" aria-expanded="true" aria-controls="faq-sintomas-3-resposta"><span class="faq-pergunta-texto">Meu ombro dói quando levanto o braço. Vale marcar uma consulta?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-sintomas-3-resposta" role="region" aria-labelledby="faq-sintomas-3-pergunta"><p>Procure avaliação se a dor persiste ou dificulta tarefas como se vestir ou alcançar uma prateleira. Conte se ela começou após uma pancada ou depois de repetir algum movimento.</p></div>
+            </div>
+            <div class="faq-item" data-aberto="false">
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-sintomas-4-pergunta" aria-expanded="true" aria-controls="faq-sintomas-4-resposta"><span class="faq-pergunta-texto">Meu calcanhar dói nos primeiros passos do dia. Isso é relevante?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-sintomas-4-resposta" role="region" aria-labelledby="faq-sintomas-4-pergunta"><p>Sim. Se a dor se repete, procure avaliação e conte quando ela aparece, se muda ao longo do dia e quanto limita sua caminhada.</p></div>
+            </div>
+            <div class="faq-item" data-aberto="false">
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-sintomas-5-pergunta" aria-expanded="true" aria-controls="faq-sintomas-5-resposta"><span class="faq-pergunta-texto">Caí ou torci o tornozelo. Quando devo ir ao pronto-socorro?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-sintomas-5-resposta" role="region" aria-labelledby="faq-sintomas-5-pergunta"><p>Procure um pronto-socorro se, depois de uma queda ou torção, houver deformidade, ferida profunda, dor intensa ou se você não conseguir apoiar o pé. Suspeita de fratura ou de articulação fora do lugar precisa de avaliação urgente.</p></div>
+            </div>
+            <div class="faq-item" data-aberto="false">
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-sintomas-6-pergunta" aria-expanded="true" aria-controls="faq-sintomas-6-resposta"><span class="faq-pergunta-texto">Minha articulação ficou quente, inchada e dolorida. Posso esperar a consulta?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-sintomas-6-resposta" role="region" aria-labelledby="faq-sintomas-6-pergunta"><p>Se o calor, o inchaço e a dor começaram de repente, procure um pronto-socorro. Isso é especialmente importante se houver febre ou calafrios.</p></div>
             </div>
           </div>
           <div class="faq-painel" role="tabpanel" id="faq-painel-clinica" aria-labelledby="faq-aba-clinica">
             <div class="faq-item" data-aberto="false">
-              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-clinica-0-pergunta" aria-expanded="true" aria-controls="faq-clinica-0-resposta"><span class="faq-pergunta-texto">Onde fica a clínica?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
-              <div class="faq-resposta" id="faq-clinica-0-resposta" role="region" aria-labelledby="faq-clinica-0-pergunta"><p>Na Av. Egito, 95, Santa Rosa, em Cuiabá, MT. O endereço e o link para o Google Maps estão em “Agendamento e endereço”, logo abaixo.</p></div>
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-clinica-0-pergunta" aria-expanded="true" aria-controls="faq-clinica-0-resposta"><span class="faq-pergunta-texto">Como a Clínica Artus funciona?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-clinica-0-resposta" role="region" aria-labelledby="faq-clinica-0-pergunta"><p>A Artus é uma clínica de Ortopedia e Traumatologia em Cuiabá que reúne especialistas de várias articulações no mesmo lugar. Se a sua queixa for de outra área, o médico pode encaminhar você a um colega da própria clínica.</p></div>
             </div>
             <div class="faq-item" data-aberto="false">
-              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-clinica-1-pergunta" aria-expanded="true" aria-controls="faq-clinica-1-resposta"><span class="faq-pergunta-texto">Onde encontro o CRM e o RQE dos médicos?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
-              <div class="faq-resposta" id="faq-clinica-1-resposta" role="region" aria-labelledby="faq-clinica-1-pergunta"><p>Os números de CRM e RQE estão nos cartões da seção Equipe médica.</p></div>
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-clinica-1-pergunta" aria-expanded="true" aria-controls="faq-clinica-1-resposta"><span class="faq-pergunta-texto">Como é a estrutura da clínica?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-clinica-1-resposta" role="region" aria-labelledby="faq-clinica-1-pergunta"><p>A Artus tem sede própria de 900 m² na Av. Egito, 95, Santa Rosa, em Cuiabá (MT). São recepção ampla, salas para consultas e procedimentos ambulatoriais e estacionamento privativo.</p></div>
             </div>
             <div class="faq-item" data-aberto="false">
-              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-clinica-2-pergunta" aria-expanded="true" aria-controls="faq-clinica-2-resposta"><span class="faq-pergunta-texto">O que é o RQE que aparece no perfil dos médicos?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
-              <div class="faq-resposta" id="faq-clinica-2-resposta" role="region" aria-labelledby="faq-clinica-2-pergunta"><p>É o Registro de Qualificação de Especialista, concedido pelo Conselho Regional de Medicina. Ele mostra que o médico tem o título de especialista registrado no conselho.</p></div>
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-clinica-2-pergunta" aria-expanded="true" aria-controls="faq-clinica-2-resposta"><span class="faq-pergunta-texto">A clínica tem acessibilidade?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-clinica-2-resposta" role="region" aria-labelledby="faq-clinica-2-pergunta"><p>Sim, a estrutura é acessível. Se você usa cadeira de rodas ou tem dificuldade para caminhar, avise a recepção ao agendar para que a equipe possa ajudar na chegada.</p></div>
+            </div>
+            <div class="faq-item" data-aberto="false">
+              <h3 class="faq-item-titulo"><button type="button" class="faq-pergunta" id="faq-clinica-3-pergunta" aria-expanded="true" aria-controls="faq-clinica-3-resposta"><span class="faq-pergunta-texto">Como os especialistas conduzem o tratamento?</span><span class="faq-mais-icone" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></button></h3>
+              <div class="faq-resposta" id="faq-clinica-3-resposta" role="region" aria-labelledby="faq-clinica-3-pergunta"><p>Os especialistas da Artus baseiam as condutas em evidências científicas e explicam ao paciente as opções de tratamento para cada caso, com e sem cirurgia.</p></div>
             </div>
           </div>
         </div>
@@ -682,7 +802,7 @@
         <div class="contact-details">
           <a class="contato-whatsapp" href="https://wa.me/556533226689?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20uma%20consulta%20na%20Cl%C3%ADnica%20Artus." target="_blank" rel="noopener"><span><small>WhatsApp · (65) 3322-6689<span class="visually-hidden"> (abre em nova aba)</span></small><strong>Agendar por mensagem</strong></span><span class="card-arrow" aria-hidden="true"><svg class="icone-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#simbolo-whatsapp"/></svg></span></a>
           <a href="tel:+556533226689"><span><small>Ligar para a recepção</small><strong>(65) 3322-6689</strong></span><span class="card-arrow" aria-hidden="true"><svg class="icone-tel" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg></span></a>
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Clinica%20Artus%20Ortopedia%20Cuiaba&amp;query_place_id=ChIJpUtfAgCznZMRXrrjG1MNmHU" target="_blank" rel="noopener"><span><small>Abrir no Google Maps<span class="visually-hidden"> (abre em nova aba)</span></small><strong>Av. Egito, 95</strong><span>Santa Rosa · Cuiabá, MT</span></span><span class="card-arrow" aria-hidden="true">↗</span></a>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Clinica%20Artus%20Ortopedia%20Cuiaba&amp;query_place_id=ChIJpUtfAgCznZMRXrrjG1MNmHU" target="_blank" rel="noopener"><span><small>Abrir no Google Maps<span class="visually-hidden"> (abre em nova aba)</span></small><strong>Av. Egito, 95</strong><span>Santa Rosa · Cuiabá, MT</span></span><span class="card-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></span></a>
         </div>
       </div>
     </section>

@@ -86,6 +86,19 @@ function scheduleNavTone() {
     if (darkShare >= navDarkAt) tone = "dark";
     else if (1 - darkShare >= navLightAt) tone = "light";
     if (header.dataset.tone !== tone) header.dataset.tone = tone;
+    // Fora da abertura (hero) a barra encolhe e flutua; volta ao tamanho cheio ao subir até ela.
+    header.toggleAttribute("data-compacto", hero.getBoundingClientRect().bottom < top + height + 24);
+  });
+}
+
+// A entrada da barra e da abertura roda uma vez só (ver .entrada-feita no CSS): termina sozinha
+// ou no primeiro foco, para não recomeçar com blur quando o foco sai da barra depois de um clique.
+{
+  const raiz = document.documentElement;
+  const encerrar = () => raiz.classList.add("entrada-feita");
+  document.addEventListener("focusin", encerrar, { once: true });
+  header.addEventListener("animationend", (e) => {
+    if (e.target === header && e.animationName === "hero-focus") setTimeout(encerrar, 600);
   });
 }
 
@@ -414,4 +427,187 @@ document.querySelectorAll(".care-copy details").forEach((pergunta) => {
       animacao.onfinish = () => { animacao = null; };
     });
   });
+})();
+
+// Animação do membro de cada perfil (mesmo comportamento do components/video-membro.tsx): loop
+// contínuo, sem botão de pausa; só toca com pelo menos 25% na tela, o arquivo só baixa quando vai tocar
+// e, com movimento reduzido, fica no pôster (também se a preferência mudar depois).
+(() => {
+  const videos = [...document.querySelectorAll(".care-xray video")];
+  if (!videos.length || !("IntersectionObserver" in window)) return;
+  const reduzir = matchMedia("(prefers-reduced-motion: reduce)");
+  const naTela = new Set();
+  const atualizar = (v) => {
+    if (naTela.has(v) && !reduzir.matches) v.play().catch(() => {});
+    else v.pause();
+  };
+  const obs = new IntersectionObserver((entradas) => {
+    entradas.forEach((e) => {
+      if (e.intersectionRatio >= 0.25) naTela.add(e.target);
+      else naTela.delete(e.target);
+      atualizar(e.target);
+    });
+  }, { threshold: [0, 0.25] });
+  videos.forEach((v) => obs.observe(v));
+  reduzir.addEventListener("change", () => videos.forEach((v) => {
+    // Volta ao pôster em vez de congelar no quadro em que estava.
+    if (reduzir.matches && v.currentTime > 0) v.load();
+    atualizar(v);
+  }));
+})();
+
+// Atalho flutuante do WhatsApp (bloco gerado por artus-react/scripts/gerar-whatsapp.mjs). Mesmo
+// comportamento do components/whatsapp-flutuante.tsx: janela não modal; Esc, o botão de fechar ou um
+// clique fora fecham; o selo some depois da primeira abertura. Ao escolher um especialista, a janela
+// vira uma conversa montada com os dados do JSON "whats-dados"; o envio abre o WhatsApp da recepção.
+(() => {
+  const raiz = document.querySelector("[data-whats]");
+  const fonte = document.getElementById("whats-dados");
+  if (!raiz || !fonte) return;
+  const dados = JSON.parse(fonte.textContent);
+  const botao = raiz.querySelector(".whats-botao");
+  const janela = raiz.querySelector(".whats-janela");
+  const voltar = raiz.querySelector(".whats-voltar");
+  const inicio = raiz.querySelector(".whats-inicio");
+  const chat = raiz.querySelector(".whats-chat");
+  const conversa = chat.querySelector(".whats-conversa");
+  const form = chat.querySelector(".whats-envio");
+  const campo = form.querySelector(".whats-campo");
+  const mandar = form.querySelector(".whats-mandar");
+  let atual = null;
+  raiz.hidden = false; // sem JavaScript o atalho não aparece; o contato do rodapé continua lá
+
+  const criar = (tag, classe, texto) => {
+    const el = document.createElement(tag);
+    if (classe) el.className = classe;
+    if (texto != null) el.textContent = texto;
+    return el;
+  };
+  // Mesma regra do juntarSugestao (lib/whatsapp.ts): troca a resposta rápida do começo e mantém o resto.
+  const juntar = (texto) => {
+    let resto = campo.value.trim();
+    const inicio = atual.opcoes.map((o) => o.texto).sort((a, b) => b.length - a.length).find((t) => resto.toLowerCase().startsWith(t.toLowerCase()));
+    if (inicio) resto = resto.slice(inicio.length).trim();
+    return resto ? texto + " " + resto : texto + " ";
+  };
+  // Mesma regra do fraseRelato (lib/whatsapp.ts): inicial maiúscula e ponto final.
+  const frase = (relato) => {
+    const t = relato.trim().replace(/\s+/g, " ");
+    if (!t) return "";
+    const f = t.charAt(0).toUpperCase() + t.slice(1);
+    return /[.!?]$/.test(f) ? f : f + ".";
+  };
+  const atualizar = () => { mandar.disabled = !campo.value.trim(); };
+
+  function alternar(abrir, devolverFoco) {
+    raiz.classList.toggle("aberta", abrir);
+    botao.setAttribute("aria-expanded", String(abrir));
+    if (abrir) {
+      raiz.querySelector(".whats-selo")?.remove();
+      janela.focus({ preventScroll: true });
+    } else if (devolverFoco) {
+      botao.focus();
+    }
+  }
+
+  function mostrarLista(focarArea) {
+    atual = null;
+    chat.hidden = true;
+    inicio.hidden = false;
+    voltar.hidden = true;
+    if (focarArea) raiz.querySelector('.whats-opcao[data-area="' + focarArea + '"]')?.focus();
+  }
+
+  function escolher(opcao) {
+    atual = dados.atalhos.find((a) => a.area === opcao.dataset.area);
+    if (!atual) return;
+    const meu = criar("div", "whats-balao whats-balao--meu");
+    meu.append(opcao.querySelector(".whats-fotos").cloneNode(true), opcao.querySelector(".whats-opcao-texto").cloneNode(true));
+    const pergunta = criar("p", "whats-balao", atual.pergunta);
+    pergunta.id = "whats-pergunta";
+    const sugestoes = criar("div", "whats-sugestoes");
+    sugestoes.setAttribute("role", "group");
+    sugestoes.setAttribute("aria-label", "Respostas rápidas");
+    atual.opcoes.forEach((o) => {
+      const b = criar("button", "whats-sugestao", o.rotulo);
+      b.type = "button";
+      b.addEventListener("click", () => {
+        campo.value = juntar(o.texto);
+        atualizar();
+        campo.focus();
+        campo.setSelectionRange(campo.value.length, campo.value.length);
+      });
+      sugestoes.append(b);
+    });
+    conversa.replaceChildren(meu, pergunta, criar("p", "whats-balao", dados.dica), sugestoes);
+    campo.value = "";
+    campo.placeholder = atual.exemplo;
+    atualizar();
+    inicio.hidden = true;
+    chat.hidden = false;
+    voltar.hidden = false;
+    conversa.scrollTop = 0;
+    chat.focus({ preventScroll: true });
+  }
+
+  botao.addEventListener("click", () => alternar(!raiz.classList.contains("aberta"), false));
+  raiz.querySelector(".whats-fechar").addEventListener("click", () => alternar(false, true));
+  voltar.addEventListener("click", () => mostrarLista(atual && atual.area));
+  raiz.querySelectorAll(".whats-opcao").forEach((opcao) => opcao.addEventListener("click", () => escolher(opcao)));
+  campo.addEventListener("input", atualizar);
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!atual || !campo.value.trim()) return;
+    const url = dados.link + encodeURIComponent((atual.inicio + " " + frase(campo.value)).trim());
+    const aba = window.open(url, "_blank");
+    // Se o navegador bloquear a nova aba, abre o WhatsApp nesta mesma aba: o relato não se perde.
+    if (!aba) {
+      location.href = url;
+      return;
+    }
+    aba.opener = null;
+    alternar(false, true);
+    mostrarLista(null);
+    campo.value = "";
+    atualizar();
+  });
+  document.addEventListener("keydown", (e) => {
+    // Só devolve o foco ao botão se ele estava na janela; se a pessoa já foi para outro ponto, fica lá.
+    if (e.key === "Escape" && raiz.classList.contains("aberta")) alternar(false, raiz.contains(document.activeElement) || document.activeElement === document.body);
+  });
+  document.addEventListener("pointerdown", (e) => {
+    if (raiz.classList.contains("aberta") && !raiz.contains(e.target)) alternar(false, false);
+  });
+})();
+
+// Vídeo de fundo do hero: é a capa e começa sozinho (autoplay, fonte escolhida pelo <source media>).
+// Pausa fora da tela; o botão do canto pausa e toca (preferência guardada na sessão).
+// Com "reduzir movimento" no sistema, fica parado no primeiro quadro até a pessoa apertar tocar.
+(() => {
+  const video = document.querySelector(".hero-video");
+  const botao = document.querySelector(".hero-pausa");
+  if (!video || !botao) return;
+  video.muted = true; // o React nem sempre grava o atributo muted, e sem ele o navegador bloqueia o play()
+  const reduzir = matchMedia("(prefers-reduced-motion: reduce)");
+  const salvo = sessionStorage.getItem("artus-hero-pausa");
+  let pausado = salvo === null ? reduzir.matches : salvo === "1";
+  let naTela = true;
+  const marcar = () => {
+    botao.setAttribute("aria-pressed", String(pausado));
+    botao.setAttribute("aria-label", pausado ? "Tocar o vídeo de fundo" : "Pausar o vídeo de fundo");
+  };
+  const atualizar = () => {
+    if (naTela && !pausado) video.play().catch(() => {});
+    else video.pause();
+  };
+  botao.addEventListener("click", () => {
+    pausado = !pausado;
+    sessionStorage.setItem("artus-hero-pausa", pausado ? "1" : "0");
+    marcar();
+    atualizar();
+  });
+  if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => { naTela = e.isIntersecting; atualizar(); }).observe(video);
+  marcar();
+  atualizar();
+  botao.hidden = false;
 })();

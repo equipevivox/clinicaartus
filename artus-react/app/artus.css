@@ -144,10 +144,18 @@ nav a:hover { color: var(--artus-accent); }
   --hero-scroll-shrink: .045;
 }
 .hero-scroll-perspective { display: flow-root; transform-origin: center 64%; }
-.hero-image, .hero-image img, .hero::after { position: absolute; inset: 0; width: 100%; height: 100%; }
-.hero-image { z-index: -2; }
-.hero-image img { object-fit: cover; object-position: center 65%; }
-.hero::after { z-index: -1; content: ""; background: linear-gradient(90deg, #09292eef 0%, #09292eb8 32%, #0e42445c 65%, #0e424422), linear-gradient(0deg, #09292eae, transparent 60%); }
+.hero::after { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero::after { z-index: -1; content: ""; background: linear-gradient(90deg, #09292ecc 0%, #09292e8f 32%, #0e424233 60%, #0e424200 82%), linear-gradient(0deg, #09292e8c, transparent 45%); }
+.hero-copy { text-shadow: 0 1px 22px #06191d73; }
+/* Vídeo de fundo do hero: é a capa desde o primeiro quadro (abre do escuro, sobre o petróleo). */
+.hero-video { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; background: #0b272d; pointer-events: none; }
+.hero-pausa { position: absolute; right: clamp(1rem, 2.4vw, 1.75rem); bottom: clamp(1rem, 2.4vw, 1.75rem); z-index: 2; display: grid; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0; border: 1px solid #ffffff4d; border-radius: 50%; color: #fff; background: #0b272d66; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); cursor: pointer; transition: background .25s, color .25s; }
+.hero-pausa:hover { color: var(--petrol); background: #fff; }
+.hero-pausa:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.hero-pausa svg { width: 1rem; height: 1rem; fill: currentColor; }
+.hero-pausa .hero-pausa-tocar, .hero-pausa[aria-pressed="true"] .hero-pausa-pausar { display: none; }
+.hero-pausa[aria-pressed="true"] .hero-pausa-tocar { display: inline; }
+@media (max-width: 760px) { .hero-pausa { top: 6.25rem; right: 1rem; bottom: auto; width: 2.5rem; height: 2.5rem; } }
 .hero-copy { padding-block: 8.5rem clamp(5.75rem, 12svh, 8rem); }
 .hero-location { display: inline-block; margin-bottom: .9rem; padding: .3rem .75rem; border-radius: 999px; background: #0d2f36; color: #e1f0f0; font-size: .875rem; font-weight: 600; line-height: 1.4; }
 h1, h2 { font-weight: 600; letter-spacing: -.03em; line-height: 1.08; text-wrap: balance; }
@@ -352,6 +360,101 @@ h2 { font-size: clamp(2rem, 3.8vw, 3.25rem); }
 .inline-link:is(:hover, :focus-visible) { color: var(--action-hover); }
 .clinic .inline-link { margin-top: .6rem; }
 
+/* Vídeo institucional: abre "Por dentro da Artus". Capa com chamada; ao tocar, a capa some e entram os
+   controles (reproduzir/pausar, linha do tempo, tempo, som e tela cheia), que se escondem com o ponteiro parado. */
+.filme { margin: 0 0 1.75rem; }
+.filme-quadro {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: 20px;
+  background: #0b272d;
+  box-shadow: 0 44px 80px -46px #08282e99, 0 0 0 1px #123e4812;
+}
+.filme-quadro video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #0b272d; }
+.filme--ocioso .filme-quadro { cursor: none; }
+.filme-quadro:fullscreen { border-radius: 0; aspect-ratio: auto; background: #000; }
+.filme-quadro:fullscreen video { object-fit: contain; background: #000; }
+
+/* Capa: a prévia sem som roda limpa; só um botão de play no centro. */
+.filme-previa { position: absolute; inset: 0; z-index: 3; width: 100%; height: 100%; object-fit: cover; pointer-events: none; transition: opacity .5s ease, visibility 0s 0s; }
+.filme--iniciado .filme-previa { opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility 0s .5s; }
+.filme-capa { position: absolute; inset: 0; z-index: 4; display: grid; place-items: center; width: 100%; padding: 0; border: 0; background: #0b272d14; cursor: pointer; transition: background .4s ease, opacity .5s ease, visibility 0s 0s; }
+.filme-capa:hover { background: #0b272d33; }
+.filme--iniciado .filme-capa { opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility 0s .5s; }
+.filme-capa:focus-visible { outline: 2px solid #fff; outline-offset: -8px; }
+.filme-capa-play { position: relative; display: grid; place-items: center; width: clamp(4.25rem, 6.4vw, 5.5rem); aspect-ratio: 1; border-radius: 50%; color: #fff; background: linear-gradient(145deg, #ffffff47 0%, #ffffff14 55%, #ffffff29 100%); -webkit-backdrop-filter: blur(18px) saturate(1.6) brightness(1.08); backdrop-filter: blur(18px) saturate(1.6) brightness(1.08); box-shadow: inset 0 1px 0 #ffffffb3, inset 0 -1px 0 #ffffff26, inset 0 0 0 1px #ffffff40, 0 18px 40px -16px #061a1f8c; transition: scale .4s cubic-bezier(.22,.7,.3,1), background .3s; }
+/* Reflexo no topo, como acrílico. */
+.filme-capa-play::before { position: absolute; inset: 3px 12% auto; height: 45%; content: ""; border-radius: 50% 50% 45% 45% / 70% 70% 30% 30%; background: linear-gradient(180deg, #ffffff59, #ffffff00); pointer-events: none; }
+.filme-capa-play svg { position: relative; display: block; width: 36%; height: 36%; fill: currentColor; stroke: currentColor; stroke-width: 2.6; stroke-linejoin: round; filter: drop-shadow(0 1px 3px #061a1f59); }
+.filme-capa:hover .filme-capa-play { scale: 1.06; background: linear-gradient(145deg, #ffffff5c 0%, #ffffff24 55%, #ffffff38 100%); }
+
+/* Carregando (só aparece se o vídeo travar esperando dados) */
+.filme-espera { position: absolute; top: 50%; left: 50%; z-index: 1; width: 3rem; height: 3rem; margin: -1.5rem 0 0 -1.5rem; border: 3px solid #ffffff40; border-top-color: #fff; border-radius: 50%; opacity: 0; pointer-events: none; transition: opacity .2s; animation: filme-gira .8s linear infinite; }
+.filme--carregando.filme--iniciado .filme-espera { opacity: 1; transition-delay: .25s; }
+@keyframes filme-gira { to { rotate: 1turn; } }
+
+/* Barra de controles */
+.filme-controles {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  padding: 3rem clamp(.6rem, 1.8vw, 1.1rem) clamp(.5rem, 1.4vw, .9rem);
+  color: #fff;
+  background: linear-gradient(180deg, #061a1f00, #061a1fb8 55%, #061a1fe0);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity .3s ease, transform .4s cubic-bezier(.22,.7,.3,1), visibility 0s .4s;
+}
+.filme--iniciado .filme-controles { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.filme--iniciado.filme--ocioso .filme-controles { opacity: 0; transform: translateY(10px); }
+.filme-botao { display: grid; flex: none; place-items: center; width: 2.75rem; height: 2.75rem; padding: 0; border: 0; border-radius: 50%; color: inherit; background: transparent; cursor: pointer; transition: background .2s, scale .15s; }
+.filme-botao:hover { background: #ffffff1f; }
+.filme-botao:active { scale: .9; }
+.filme-botao:focus-visible, .filme-linha:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.filme-botao svg { width: 1.35rem; height: 1.35rem; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.filme-botao svg .cheio { fill: currentColor; stroke: none; }
+.filme-som svg .cheio { stroke: currentColor; stroke-width: 1.5; }
+.i-pausa, .i-mudo, .i-sair,
+.filme--tocando .i-play, .filme--mudo .i-som, .filme--tela-cheia .i-cheia { display: none; }
+.filme--tocando .i-pausa, .filme--mudo .i-mudo, .filme--tela-cheia .i-sair { display: block; }
+
+/* Linha do tempo: área de toque alta, trilho fino que engrossa no hover e no arraste. */
+.filme-linha { position: relative; display: flex; flex: 1; align-items: center; min-width: 0; height: 2.75rem; margin: 0 .5rem; border-radius: 6px; cursor: pointer; touch-action: none; -webkit-tap-highlight-color: transparent; }
+.filme-trilho { position: relative; width: 100%; height: 4px; overflow: hidden; border-radius: 999px; background: #ffffff38; transition: height .18s ease; }
+.filme-linha:hover .filme-trilho, .filme-linha:focus-visible .filme-trilho, .filme--arrastando .filme-trilho { height: 6px; }
+.filme-carregado, .filme-progresso { position: absolute; inset: 0; transform: scaleX(0); transform-origin: left; }
+.filme-carregado { background: #ffffff40; }
+.filme-progresso { background: linear-gradient(90deg, #8adbe0, #fff); }
+/* O ponto fica num ::before: o "scale" dele não pode encolher o translateX que o script põe na cabeça. */
+.filme-cabeca { position: absolute; top: 50%; left: 0; width: 0; height: 0; pointer-events: none; }
+.filme-cabeca::before { position: absolute; top: -7px; left: -7px; width: 14px; height: 14px; content: ""; border-radius: 50%; background: #fff; box-shadow: 0 0 0 5px #ffffff2e, 0 2px 8px #0006; scale: .7; transition: scale .18s ease; }
+.filme-linha:hover .filme-cabeca::before, .filme-linha:focus-visible .filme-cabeca::before, .filme--arrastando .filme-cabeca::before { scale: 1; }
+.filme-dica { position: absolute; bottom: calc(100% - .2rem); left: -1.7rem; width: 3.4rem; padding: .25rem 0; border-radius: 6px; color: #fff; background: #0b272df0; font-size: .8125rem; font-weight: 600; font-variant-numeric: tabular-nums; text-align: center; opacity: 0; pointer-events: none; transition: opacity .15s; }
+.filme-linha:hover .filme-dica, .filme--arrastando .filme-dica { opacity: 1; }
+.filme-tempo { flex: none; margin-right: .25rem; color: #e6f3f4; font-size: .875rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+@media (max-width: 760px) {
+  .filme { margin-bottom: 1.25rem; }
+  .filme-quadro { border-radius: 14px; }
+  .filme-capa-play { width: 3.5rem; }
+  .filme-controles { gap: .1rem; padding-top: 2.25rem; }
+  .filme-botao { width: 2.5rem; height: 2.5rem; }
+  .filme-linha { margin: 0 .35rem; }
+  .filme-tempo { font-size: .8125rem; }
+  .filme-dica { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .filme-espera { animation: none; }
+  .filme-capa, .filme-previa, .filme-capa-play, .filme-controles, .filme-botao, .filme-trilho, .filme-cabeca::before { transition: none; }
+  .filme-capa:hover .filme-capa-play { scale: 1; }
+}
+
 .team-intro { display: grid; grid-template-columns: 1fr .88fr; align-items: center; gap: 1.25rem 3.5rem; margin-bottom: 2rem; }
 .team-intro p:not(.eyebrow) { margin-top: .9rem; }
 .team-intro img { border-radius: var(--artus-radius); }
@@ -370,6 +473,11 @@ h2 { font-size: clamp(2rem, 3.8vw, 3.25rem); }
 .contact { position: relative; padding-bottom: 2.5rem; color: white; }
 .contact-background { position: absolute; inset: 34% 0 0; background: #102e35; }
 .contact-layout { position: relative; display: grid; grid-template-columns: 1fr .8fr; align-items: center; gap: 2rem 5vw; padding: clamp(1.35rem, 5.1vw, 4.6rem); overflow: hidden; isolation: isolate; border-radius: var(--artus-radius); background: #123e48; }
+/* Foto da recepção ao fundo do bloco de agendamento, escurecida à esquerda para o título ficar legível. */
+.contact-layout { background: linear-gradient(90deg, #0d313ae6 0%, #123e48b8 46%, #123e4880 100%), url("/assets/contato-espera.webp") 40% 70% / cover no-repeat, #123e48; }
+@media (max-width: 760px) {
+  .contact-layout { background: linear-gradient(180deg, #0d313acc 0%, #123e48db 60%, #123e48eb 100%), url("/assets/contato-espera-mobile.webp") center 70% / cover no-repeat, #123e48; }
+}
 .contact p { max-width: 38ch; margin-top: .85rem; color: #f0f8f8; }
 .contact-details { display: grid; gap: .6rem; }
 .contact-details a { display: flex; justify-content: space-between; align-items: center; gap: .8rem; padding: .8rem .95rem; border: 1px solid #ffffff8a; border-radius: 6px; background: #123e48; transition: background-color .2s; }
@@ -400,7 +508,7 @@ h2 { font-size: clamp(2rem, 3.8vw, 3.25rem); }
 
 @media (prefers-reduced-motion: no-preference) {
   .site-header,
-  .hero-image img,
+  .hero-video,
   .hero-copy > :is(h1, .hero-description, .hero-regioes),
   .hero-actions > .button {
     animation:
@@ -413,7 +521,7 @@ h2 { font-size: clamp(2rem, 3.8vw, 3.25rem); }
     --hero-focus-opacity: .72;
     --hero-focus-delay: 35ms;
   }
-  .hero-image img {
+  .hero-video {
     --hero-focus-x: 0px;
     --hero-focus-blur: 7px;
     --hero-focus-opacity: .74;
@@ -436,7 +544,8 @@ h2 { font-size: clamp(2rem, 3.8vw, 3.25rem); }
   .quick-inner:focus-within :is(.team-quick-link > *, .team-portraits),
   .quick-inner:focus-within > a > *,
   .hero-copy:focus-within > *,
-  .hero-copy:focus-within .hero-actions > .button { animation: none; }
+  .hero-copy:focus-within .hero-actions > .button,
+  .entrada-feita :is(.site-header, .hero-video, .hero-copy > *, .hero-actions > .button, .hero-regions, .quick-inner, .quick-inner *) { animation: none; }
   @keyframes hero-enter {
     from {
       opacity: var(--hero-focus-opacity, .55);
@@ -469,8 +578,7 @@ h2 { font-size: clamp(2rem, 3.8vw, 3.25rem); }
   .menu-ready nav.is-open { opacity: 1; visibility: visible; transform: none; }
   .hero { min-height: clamp(590px, calc(100svh - 76px), 870px); }
   .hero-scroll-stage { --hero-scroll-rise: -22px; --hero-scroll-tilt: -4deg; --hero-scroll-shrink: .025; }
-  .hero-image img { object-position: 54% 44%; }
-  .hero::after { background: linear-gradient(0deg, #0a292ffb 3%, #0a292fdf 30%, #0c323572 65%, #0e424422); }
+  .hero::after { background: linear-gradient(0deg, #0a292feb 0%, #0a292fb8 32%, #0c32355c 66%, #0e42421f); }
   .hero-copy { padding-block: 9rem 4.75rem; }
   :is(.site-header, .hero-copy, .quick-info) {
     --hero-focus-blur: 3px;
@@ -559,7 +667,7 @@ html.abertura-elegivel { background: #123e48; }
 .abertura-video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .abertura-saindo .abertura { opacity: 0; pointer-events: none; }
 /* O hero só começa a entrar quando a abertura sai, para as duas animações se encadearem. */
-.com-abertura:not(.abertura-saindo) :is(.site-header, .hero-image img, .hero-copy > *, .hero-actions > .button, .quick-inner, .quick-inner *) { animation-play-state: paused; }
+.com-abertura:not(.abertura-saindo) :is(.site-header, .hero-video, .hero-copy > *, .hero-actions > .button, .quick-inner, .quick-inner *) { animation-play-state: paused; }
 
 /* Perfis: cartão mais sóbrio (rodada 9). A coluna das imagens fica num painel petróleo escuro (foto e
    radiografia ilustrativa); o texto fica sobre um tom suave, não branco; tipografia menor e mais calma. */
@@ -650,8 +758,8 @@ html.abertura-elegivel { background: #123e48; }
 /* Radiografia ilustrativa (rodada 9): quadro escuro no tom do fundo das imagens, imagem inteira
    (contain), legenda discreta. Ao aparecer o perfil, a imagem se revela de cima para baixo, como num
    negatoscópio que acende; com movimento reduzido, aparece pronta. */
-.care-xray { position: relative; margin: 0; height: clamp(10rem, 13vw, 12.5rem); overflow: hidden; border-radius: 12px; background: #03171e; }
-.care-xray img { width: 100%; height: 100%; object-fit: contain; }
+.care-xray { position: relative; margin: 0; height: clamp(12rem, 19vw, 16rem); overflow: hidden; }
+.care-xray-midia { position: absolute; inset: 0; margin: 0; }
 .care-xray figcaption { position: absolute; left: .8rem; bottom: .55rem; color: #a9d3d6; font-size: .875rem; font-weight: 500; letter-spacing: .02em; text-shadow: 0 1px 3px #03171e; }
 .care-area { font-size: .875rem; letter-spacing: .08em; }
 .care-copy h4 { font-size: .875rem; letter-spacing: .08em; }
@@ -661,8 +769,8 @@ html.abertura-elegivel { background: #123e48; }
   to { clip-path: inset(0); filter: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .care-profiles[data-ativo]:not(.is-visto) .care-xray img { clip-path: inset(0 0 100% 0); }
-  .care-profiles.is-visto .care-profile .care-xray img { animation: raio-x-revela 1.1s cubic-bezier(.22,.7,.3,1) both; }
+  .care-profiles[data-ativo]:not(.is-visto) .care-xray video { clip-path: inset(0 0 100% 0); }
+  .care-profiles.is-visto .care-profile .care-xray video { animation: raio-x-revela 1.1s cubic-bezier(.22,.7,.3,1) both; }
 }
 @media (max-width: 760px) {
   .care-xray { height: 100%; }
@@ -670,9 +778,10 @@ html.abertura-elegivel { background: #123e48; }
   .care-xray-regiao { display: none; }
 }
 
-/* Radiografia sem bordas (rodada 9): a imagem ocupa a altura do quadro, centralizada, e se dissolve no
-   fundo pelas quatro bordas (máscara na própria imagem), sem mostrar o retângulo da foto. */
-.care-xray img {
+/* Membro animado sem bordas: o vídeo ocupa a altura do quadro, centralizado. O fundo dele (preto puro) é
+   mais escuro que o do painel (#0f2b31); com lighten fica a cor mais clara de cada ponto, então o fundo
+   do vídeo some no painel e só os ossos aparecem. A máscara leve apaga qualquer corte na borda. */
+.care-xray video {
   position: absolute;
   top: 0;
   left: 50%;
@@ -680,13 +789,30 @@ html.abertura-elegivel { background: #123e48; }
   max-width: none;
   height: 100%;
   translate: -50% 0;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 22%, #000 78%, transparent), linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent);
+  mix-blend-mode: lighten;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent), linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
   -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent, #000 22%, #000 78%, transparent), linear-gradient(to bottom, transparent, #000 16%, #000 84%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent), linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
   mask-composite: intersect;
 }
 @media (max-width: 760px) {
-  .care-xray img { top: 50%; left: 0; width: 100%; height: auto; translate: 0 -50%; }
+  .care-xray video { top: 50%; left: 0; width: 100%; height: auto; translate: 0 -50%; }
+}
+
+/* O membro aparece maior no quadro e se aproxima e se afasta devagar (zoom suave, sem chegar perto
+   demais). A escala fica na figura, para não brigar com a animação de revelar do vídeo; como a escala
+   isola a figura, ela leva o fundo do próprio vídeo. O membro fica num retângulo preto de cantos
+   arredondados, como a foto acima. */
+.care-xray { height: clamp(13rem, 21vw, 18rem); border-radius: 12px; background: #000; }
+.care-xray-midia { scale: 1.3; background: #000; }
+@keyframes membro-respira { from { scale: 1.26; } to { scale: 1.4; } }
+@media (prefers-reduced-motion: no-preference) {
+  .care-xray-midia { animation: membro-respira 9s ease-in-out infinite alternate; }
+}
+@media (max-width: 760px) {
+  .care-xray { height: 100%; }
+  .care-xray-midia { scale: 1.28; }
+  @keyframes membro-respira { from { scale: 1.22; } to { scale: 1.34; } }
 }
 
 /* Troca de médico mais suave: o perfil que sai e o que entra se cruzam (View Transitions); onde não
@@ -809,36 +935,95 @@ html.abertura-elegivel { background: #123e48; }
 /* Perfis: WhatsApp e "Ligar para agendar" lado a lado; em coluna estreita, um embaixo do outro. */
 .care-acoes { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; }
 
-/* Agendamento e endereço: o cartão do WhatsApp vem primeiro, no mesmo degradê. */
-.contact-details a.contato-whatsapp {
+@media (prefers-reduced-motion: reduce) {
+  .botao-whatsapp, .botao-whatsapp::after { transition: none; }
+  .botao-whatsapp:is(:hover, :focus-visible) { translate: none; }
+  .botao-whatsapp:hover::after { transform: translateX(-160%) skewX(-18deg); }
+}
+
+/* Agendamento e endereço: cartões de vidro sobre a foto da recepção. Ícone num círculo à esquerda,
+   seta à direita que avança no hover. O WhatsApp vem num verde mais fechado, com texto branco legível. */
+.contact-details { gap: .75rem; }
+.contact-details a {
   position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  color: #04331a;
-  border-color: transparent;
-  background: linear-gradient(135deg, #5ffc7b 0%, #28d146 100%);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  min-height: 5.25rem;
+  padding: 1rem 3.25rem 1rem 1rem;
+  border: 1px solid #ffffff2b;
+  border-radius: 16px;
+  color: #fff;
+  background: #0b2a31a6;
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  backdrop-filter: blur(14px) saturate(1.3);
+  box-shadow: inset 0 1px 0 #ffffff1f, 0 14px 30px -18px #000000b3;
+  transition: translate .3s cubic-bezier(.22,.7,.3,1), box-shadow .3s ease, border-color .2s, background-color .2s;
+}
+.contact-details a::after {
+  position: absolute;
+  top: 50%;
+  right: 1.35rem;
+  width: .55rem;
+  height: .55rem;
+  margin-top: -.28rem;
+  content: "";
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  rotate: 45deg;
+  opacity: .7;
+  transition: translate .3s cubic-bezier(.22,.7,.3,1), opacity .2s;
+}
+.contact-details a .card-arrow {
+  order: -1;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid #ffffff33;
+  border-radius: 50%;
+  color: #bfeef2;
+  background: #ffffff14;
   box-shadow: none;
-  transition: box-shadow .3s ease, translate .3s cubic-bezier(.22,.7,.3,1);
+  transition: background-color .2s, color .2s;
 }
-.contact-details a.contato-whatsapp small { color: #0a4d27; }
-.contact-details a.contato-whatsapp .card-arrow {
-  color: #04331a;
-  border-color: #ffffff99;
-  background: #ffffff59;
-  box-shadow: inset 0 1px 0 #ffffffb3;
+.contact-details a .card-arrow svg { width: 1.3rem; height: 1.3rem; }
+.contact-details small { color: #bcd9dc; font-size: .8125rem; letter-spacing: .01em; }
+.contact-details strong { margin-top: .1rem; font-size: clamp(1.2rem, 1.9vw, 1.45rem); line-height: 1.2; letter-spacing: -.01em; }
+.contact-details strong + span { display: block; margin-top: .1rem; color: #d7ebed; font-size: .9375rem; }
+.contact-details a:is(:hover, :focus-visible) {
+  color: #fff;
+  border-color: #ffffff59;
+  background: #0b2a31d1;
+  translate: 0 -2px;
+  box-shadow: inset 0 1px 0 #ffffff26, 0 20px 36px -18px #000000cc;
 }
-.contact-details a.contato-whatsapp .card-arrow .icone-whatsapp { width: 1.25rem; height: 1.25rem; }
+.contact-details a:is(:hover, :focus-visible)::after { translate: .2rem 0; opacity: 1; }
+.contact-details a:is(:hover, :focus-visible) .card-arrow { color: #fff; background: #ffffff26; }
+
+.contact-details a.contato-whatsapp {
+  border-color: #ffffff38;
+  background: linear-gradient(135deg, #0f8443 0%, #0a6e37 100%);
+  box-shadow: inset 0 1px 0 #ffffff40, 0 16px 32px -16px #063f20e6;
+}
+.contact-details a.contato-whatsapp small { color: #e3f8ec; }
+.contact-details a.contato-whatsapp .card-arrow { color: #0f8443; border-color: #fff; background: #fff; }
+.contact-details a.contato-whatsapp .card-arrow .icone-whatsapp { width: 1.45rem; height: 1.45rem; }
 .contact-details a.contato-whatsapp:is(:hover, :focus-visible) {
-  color: #04331a;
-  background: linear-gradient(135deg, #5ffc7b 0%, #28d146 100%);
-  translate: 0 -1px;
-  filter: saturate(1.12);
-  box-shadow: none;
+  border-color: #ffffff59;
+  background: linear-gradient(135deg, #11904a 0%, #0b773c 100%);
+  box-shadow: inset 0 1px 0 #ffffff4d, 0 22px 38px -16px #063f20f2;
+}
+.contact-details a.contato-whatsapp:is(:hover, :focus-visible) .card-arrow { color: #0b773c; background: #fff; }
+.contact-details a:active { translate: 0 0; transition-duration: .1s; }
+:is(.contact-details a.contato-whatsapp, .contact-details a.contato-whatsapp *)::selection { color: #fff; background: #04331a; }
+@media (max-width: 760px) {
+  .contact-details a { gap: .85rem; min-height: 4.75rem; padding: .85rem 2.75rem .85rem .85rem; }
+  .contact-details a::after { right: 1.1rem; }
+  .contact-details a .card-arrow { width: 2.65rem; height: 2.65rem; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .botao-whatsapp, .botao-whatsapp::after, .contact-details a.contato-whatsapp { transition: none; }
-  .botao-whatsapp:is(:hover, :focus-visible), .contact-details a.contato-whatsapp:is(:hover, :focus-visible) { translate: none; }
-  .botao-whatsapp:hover::after { transform: translateX(-160%) skewX(-18deg); }
+  .contact-details a, .contact-details a::after, .contact-details a .card-arrow { transition: none; }
+  .contact-details a:is(:hover, :focus-visible), .contact-details a:is(:hover, :focus-visible)::after { translate: none; }
 }
 
 /* =====================================================================================
@@ -1423,3 +1608,248 @@ body { padding-bottom: var(--cookies-aviso-espaco, 0px); }
 /* A barra de navegação fica acima de tudo na página (a galeria da equipe aberta, retratos etc.);
    só o aviso de cookies e a abertura em vídeo passam por cima. */
 .site-header { z-index: 60; }
+
+/* =====================================================================================
+   Atalho flutuante do WhatsApp: botão no canto inferior direito da tela, com
+   selo do número de especialistas. Abre uma mini-janela no estilo de conversa com uma opção por
+   área. O mesmo bloco está em artus.css (Next) e styles.css (estática): mantenha os dois iguais.
+   ===================================================================================== */
+.whats-flutuante {
+  /* Verde escuro o bastante para o ícone branco passar de 3:1 (3,63:1). */
+  --whats-verde: #1b9a4e;
+  --whats-escuro: #075e54;
+  position: fixed;
+  right: clamp(1rem, 2vw, 1.5rem);
+  bottom: clamp(1rem, 2vw, 1.5rem);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.whats-botao {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(180deg, #ffffff1f, #ffffff00 45%), var(--whats-verde);
+  box-shadow: inset 0 1px #ffffff59, 0 10px 24px -10px #128c4ad9, 0 2px 6px #08282e2e;
+  cursor: pointer;
+  transition: transform .2s cubic-bezier(.22,.7,.3,1), box-shadow .2s;
+}
+.whats-botao:hover { transform: translateY(-2px) scale(1.04); box-shadow: inset 0 1px #ffffff59, 0 14px 30px -10px #128c4ae6, 0 2px 6px #08282e2e; }
+.whats-botao:active { transform: scale(.97); transition-duration: .1s; }
+.whats-botao:focus-visible { outline: 3px solid var(--petrol); outline-offset: 3px; }
+.whats-botao-icone { width: 30px; height: 30px; }
+.whats-selo {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  display: grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  padding-inline: 6px;
+  border: 2px solid #fff;
+  border-radius: 999px;
+  color: #fff;
+  background: #e5262b;
+  font-size: .8125rem;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 2px 6px #7a0d1059;
+}
+
+.whats-janela {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 14px);
+  display: flex;
+  flex-direction: column;
+  width: min(380px, calc(100vw - 32px));
+  max-height: calc(100dvh - 120px);
+  overflow: hidden;
+  border: 1px solid #0b141a12;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 32px 70px -24px #08282e80, 0 8px 22px -8px #08282e2e;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px) scale(.97);
+  transform-origin: bottom right;
+  transition: opacity .22s, transform .3s cubic-bezier(.22,.7,.3,1), visibility 0s .3s;
+}
+/* Aberta, fica acima do aviso de cookies (z-index 70) e do cabeçalho (60). */
+.whats-flutuante.aberta { z-index: 80; }
+.whats-flutuante.aberta .whats-janela { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.whats-janela:focus { outline: none; }
+.whats-janela:focus-visible { outline: 3px solid var(--petrol); outline-offset: 3px; }
+
+/* Topo limpo, em branco: marca da Artus, ponto verde de "atendimento" e os botões em círculos suaves. */
+.whats-topo { display: flex; align-items: center; gap: .75rem; padding: .95rem .8rem .95rem 1.05rem; color: #111b21; background: #fff; border-bottom: 1px solid #0b141a0f; }
+.whats-topo-avatar { position: relative; display: grid; flex: none; place-items: center; width: 44px; height: 44px; border-radius: 14px; background: #f1f6f5; box-shadow: inset 0 0 0 1px #0b141a0d; }
+.whats-topo-avatar img { display: block; width: 32px; height: auto; }
+.whats-topo-avatar::after { position: absolute; right: -3px; bottom: -3px; width: 12px; height: 12px; content: ""; border: 2px solid #fff; border-radius: 50%; background: #25d366; }
+.whats-topo-texto { flex: 1; min-width: 0; }
+.whats-topo-texto p { margin: 0; }
+.whats-topo-nome { font-weight: 700; line-height: 1.25; letter-spacing: -.01em; }
+.whats-topo-status { display: flex; align-items: center; gap: .35rem; color: #54656f; font-size: .8125rem; line-height: 1.3; }
+.whats-fechar, .whats-voltar { display: grid; flex: none; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%; color: #3b4a54; background: #f1f4f4; cursor: pointer; transition: background .2s, color .2s; }
+.whats-fechar:hover, .whats-voltar:hover { color: #111b21; background: #e4eaea; }
+.whats-fechar:focus-visible, .whats-voltar:focus-visible { outline: 3px solid var(--petrol); outline-offset: 2px; }
+.whats-fechar svg, .whats-voltar svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.whats-voltar { margin-right: -.2rem; margin-left: -.3rem; }
+.whats-flutuante[hidden], .whats-flutuante [hidden] { display: none; }
+
+.whats-conversa { overflow-y: auto; overscroll-behavior: contain; padding: 1.1rem .95rem 1.1rem; background: linear-gradient(180deg, #f6f9f8, #f1f5f4); }
+.whats-balao {
+  position: relative;
+  width: fit-content;
+  max-width: 88%;
+  margin: 0 0 .9rem;
+  padding: .65rem .9rem;
+  border-radius: 6px 18px 18px 18px;
+  color: #111b21;
+  background: #fff;
+  font-size: .9375rem;
+  line-height: 1.45;
+  box-shadow: 0 1px 2px #0b141a14, 0 0 0 1px #0b141a0a;
+}
+.whats-lista { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.whats-opcao {
+  display: flex;
+  width: 100%;
+  border: 1px solid #0b141a12;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  align-items: center;
+  gap: .8rem;
+  min-height: 64px;
+  padding: .6rem .7rem .6rem .6rem;
+  border-radius: 16px;
+  color: #111b21;
+  background: #fff;
+  text-decoration: none;
+  box-shadow: 0 1px 2px #0b141a0d;
+  transition: border-color .2s, box-shadow .2s, transform .2s cubic-bezier(.22,.7,.3,1);
+}
+.whats-opcao:hover { border-color: #128c4a59; box-shadow: 0 8px 20px -12px #08282e59; transform: translateY(-1px); }
+.whats-opcao:focus-visible { outline: 3px solid var(--petrol); outline-offset: 2px; }
+.whats-fotos { display: flex; flex: none; gap: 4px; }
+.whats-fotos img { display: block; width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; background: #dce5e5; box-shadow: 0 0 0 1px #0b141a14; }
+.whats-opcao-texto { display: grid; flex: 1; min-width: 0; gap: .12rem; }
+.whats-opcao-texto strong { font-size: .9375rem; font-weight: 600; line-height: 1.3; }
+.whats-opcao-texto span { color: #54656f; font-size: .8125rem; line-height: 1.3; }
+/* A seta fica num círculo verde-claro, que acende no hover. */
+.whats-enviar { flex: none; box-sizing: content-box; width: 16px; height: 16px; padding: 8px; border-radius: 50%; fill: none; stroke: #128c4a; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; background: #e9f7ef; transition: transform .2s, background .2s, stroke .2s; }
+.whats-opcao:hover .whats-enviar { stroke: #fff; background: #128c4a; transform: translateX(2px); }
+
+/* Segunda etapa: conversa com o atendimento para dizer onde é a dor. */
+.whats-chat { display: flex; flex: 1; flex-direction: column; min-height: 0; }
+.whats-chat:focus { outline: none; }
+.whats-chat:focus-visible { outline: 3px solid var(--petrol); outline-offset: -3px; }
+.whats-chat .whats-conversa { flex: 1; }
+.whats-balao--meu { display: flex; align-items: center; gap: .65rem; margin-left: auto; border-radius: 18px 6px 18px 18px; background: #dcf8e5; box-shadow: 0 1px 2px #0b141a14; }
+.whats-balao--meu .whats-fotos img { box-shadow: 0 0 0 2px #fff; }
+.whats-sugestoes { display: flex; flex-wrap: wrap; gap: .45rem; }
+.whats-sugestao { min-height: 40px; padding: .45rem 1rem; border: 1px solid #0b141a1a; border-radius: 999px; color: #0b5e3a; background: #fff; font: inherit; font-size: .875rem; font-weight: 600; cursor: pointer; box-shadow: 0 1px 2px #0b141a0d; transition: background .2s, border-color .2s, color .2s; }
+.whats-sugestao:hover { border-color: #0e7a3f; background: #0e7a3f; color: #fff; }
+.whats-sugestao:focus-visible { outline: 3px solid var(--petrol); outline-offset: 2px; }
+.whats-envio { display: flex; flex: none; align-items: center; gap: .5rem; padding: .7rem .75rem; border-top: 1px solid #0b141a0f; background: #fff; }
+/* 16px no campo: o iPhone não aproxima a página ao tocar nele. */
+.whats-campo { flex: 1; min-width: 0; min-height: 46px; padding: .55rem 1.1rem; border: 1px solid #8696a0; border-radius: 999px; color: #111b21; background: #f7f9f9; font: inherit; font-size: 1rem; transition: border-color .2s, background .2s, box-shadow .2s; }
+.whats-campo::placeholder { color: #54656f; }
+.whats-campo:focus { border-color: #128c4a; background: #fff; outline: none; box-shadow: 0 0 0 3px #128c4a26; }
+.whats-mandar { display: grid; flex: none; place-items: center; width: 46px; height: 46px; padding: 0; border: 0; border-radius: 50%; color: #fff; background: #128c4a; box-shadow: 0 6px 14px -6px #128c4ab3; cursor: pointer; transition: background .2s, opacity .2s, transform .2s; }
+.whats-mandar:hover:not(:disabled) { background: #0e7a3f; transform: scale(1.04); }
+.whats-mandar:disabled { opacity: .4; box-shadow: none; cursor: not-allowed; }
+.whats-mandar:focus-visible { outline: 3px solid var(--petrol); outline-offset: 2px; }
+.whats-mandar svg { width: 20px; height: 20px; fill: currentColor; }
+
+/* A abertura em vídeo cobre a página; o atalho só aparece depois dela. */
+.com-abertura:not(.abertura-saindo) .whats-flutuante { visibility: hidden; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .whats-botao { animation: whats-entrar .5s cubic-bezier(.22,.7,.3,1) .6s backwards; }
+  .whats-selo { animation: whats-selo .4s cubic-bezier(.3,1.6,.5,1) 1.1s backwards; }
+  @keyframes whats-entrar { from { opacity: 0; transform: translateY(10px) scale(.85); } }
+  @keyframes whats-selo { from { transform: scale(0); } }
+  /* Os balões da conversa chegam um depois do outro. */
+  .whats-chat .whats-balao, .whats-chat .whats-sugestoes { animation: whats-balao .3s ease-out backwards; }
+  .whats-chat .whats-balao:nth-child(2) { animation-delay: .25s; }
+  .whats-chat .whats-balao:nth-child(3) { animation-delay: .5s; }
+  .whats-chat .whats-sugestoes { animation-delay: .7s; }
+  @keyframes whats-balao { from { opacity: 0; transform: translateY(6px); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .whats-botao, .whats-opcao, .whats-enviar, .whats-janela, .whats-sugestao, .whats-mandar { transition: none; }
+  .whats-botao:hover, .whats-botao:active, .whats-opcao:hover, .whats-opcao:hover .whats-enviar, .whats-mandar:hover:not(:disabled) { transform: none; }
+}
+@media (max-width: 760px) {
+  .whats-flutuante { right: 16px; bottom: 16px; }
+  .whats-botao { width: 52px; height: 52px; }
+  .whats-botao-icone { width: 27px; height: 27px; }
+  .whats-janela { width: calc(100vw - 32px); max-height: calc(100dvh - 100px); }
+  /* No celular o aviso de cookies ocupa a largura toda embaixo: o atalho espera a pessoa responder. */
+  body:has(.cookies-aviso.visivel) .whats-flutuante { visibility: hidden; }
+}
+@media print { .whats-flutuante { display: none; } }
+
+/* Barra que encolhe ao rolar: fora da abertura (data-compacto, posto pelo home.js) ela fica mais
+   estreita, em pílula e com sombra mais funda; ao voltar à abertura, retoma o tamanho cheio. */
+.site-header #menu a { gap: .45rem; white-space: nowrap; }
+.nav-icone { width: 1rem; height: 1rem; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: .7; }
+.site-header { transition: width .6s cubic-bezier(.22,.7,.3,1), translate .6s cubic-bezier(.22,.7,.3,1), border-radius .6s cubic-bezier(.22,.7,.3,1), box-shadow .4s ease, background-color .3s ease; }
+.site-header[data-compacto] { translate: 0 6px; box-shadow: 0 2px 6px #08282e14, 0 18px 44px #08282e29, inset 0 1px #ffffff2b; }
+@media (min-width: 761px) {
+  .site-header[data-compacto] { width: min(calc(100% - 48px), 62.5rem); border-radius: 999px; }
+  .site-header[data-compacto] .nav-shell { padding-inline: 24px 9px; }
+  .site-header[data-compacto] nav { gap: clamp(.9rem, 2vw, 1.6rem); }
+  .site-header[data-compacto] .button-header { border-radius: 999px; }
+}
+@media (max-width: 760px) {
+  .site-header[data-compacto] { width: calc(100% - 24px); border-radius: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { .site-header { transition: none; } }
+/* Faixa estreita do menu de desktop: sem ícones, para os nomes não quebrarem nem a barra crescer. */
+@media (min-width: 761px) and (max-width: 1100px) { .site-header .nav-icone { display: none; } }
+/* Menu do celular em tela baixa (ou com zoom): rola por dentro, o último link continua alcançável. */
+@media (max-width: 760px) { .menu-ready nav { max-height: calc(100dvh - 90px); overflow-y: auto; overscroll-behavior: contain; } }
+
+/* Equipe: foto grande de ponta a ponta, texto no lado esquerdo (fora dos rostos) e os cards por cima da parte de baixo. */
+/* Sem respiro em cima: a foto encosta na seção anterior. A âncora #equipe já desconta o cabeçalho (scroll-padding-top). */
+.team-section { --equipe-foto: 64%; --equipe-sobra: clamp(64px, 8.5vw, 150px); padding-top: 0; }
+/* Foto e texto dividem a mesma célula da grade: o texto fica no fluxo, então a seção cresce se ele precisar de mais altura. */
+.team-hero { position: relative; isolation: isolate; display: grid; overflow: hidden; color: #fff;
+  /* Fundo com as mesmas cores da borda esquerda da foto, para a emenda sumir. */
+  background: linear-gradient(180deg, #4c3b2d 0%, #5a4639 10%, #61503f 40%, #5d4d40 68%, #4e3e30 76%, #463729 82%, #554339 100%); }
+.team-hero > * { grid-area: 1 / 1; }
+.team-hero-foto { display: block; justify-self: end; width: var(--equipe-foto); }
+.team-hero-foto img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 60% 30%; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 12%); mask-image: linear-gradient(90deg, transparent 0, #000 12%); }
+/* Véu escuro só do lado do texto, para o branco manter contraste mesmo sobre a parede clara. */
+.team-hero::after { z-index: 1; grid-area: 1 / 1; content: ""; background: linear-gradient(90deg, #1c140e00 0, #1c140e1f calc(100% - var(--equipe-foto) * 1.02), #1c140e73 calc(100% - var(--equipe-foto) * .86), #1c140e00 calc(100% - var(--equipe-foto) * .66)); pointer-events: none; }
+.team-hero-texto { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: center; margin-right: calc(var(--equipe-foto) * .86 + 1.5rem); margin-left: max(32px, calc((100% - var(--page)) / 2)); padding-block: 2.5rem calc(var(--equipe-sobra) + 2rem); }
+.team-hero-texto h2 { color: #fff; text-wrap: pretty; }
+.team-hero-texto p { max-width: 38ch; margin-top: .9rem; color: #fff; }
+.team-cards { position: relative; z-index: 3; margin-top: calc(-1 * var(--equipe-sobra)); border-radius: 12px; background: var(--wash); box-shadow: 0 30px 60px -30px #08282e66, 0 10px 24px -14px #08282e33; }
+/* Telas médias: foto mais larga e cards sobrepondo menos, para não cobrir a equipe. */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .team-section { --equipe-foto: 74%; --equipe-sobra: 48px; }
+  .team-hero-texto h2 { font-size: clamp(1.6rem, 3.2vw, 2rem); }
+  .team-hero-texto p { font-size: .9375rem; }
+}
+@media (max-width: 760px) {
+  .team-section { --equipe-foto: 100%; --equipe-sobra: 44px; }
+  .team-hero { background: #4b4034; }
+  .team-hero-foto img { -webkit-mask-image: none; mask-image: none; }
+  /* No celular o texto fica no alto da foto, na parede acima da equipe; o véu acompanha a altura do texto e garante a leitura. */
+  .team-hero::after { content: none; }
+  .team-hero-texto { align-self: start; margin: 0; padding: 1rem 20px 3rem; background: linear-gradient(180deg, #1c140e9e 0, #1c140e85 calc(100% - 3rem), #1c140e00); }
+  .team-hero-texto h2 { font-size: clamp(1.4rem, 6.4vw, 1.75rem); line-height: 1.12; }
+  .team-hero-texto p { max-width: 34ch; margin-top: .4rem; font-size: .8125rem; line-height: 1.4; }
+}

@@ -9,7 +9,7 @@ import { ABERTURA_DECIDIR } from "@/lib/abertura";
 
 export const metadata: Metadata = {
   title: "Clínica Artus Ortopedia | Cuiabá, MT",
-  description: "Conheça as áreas de ortopedia da Clínica Artus, em Cuiabá, e agende sua consulta pela central (65) 3322-6689.",
+  description: "Conheça os especialistas em Ortopedia e Traumatologia da Clínica Artus, em Cuiabá. Agende uma consulta pelo telefone ou WhatsApp (65) 3322-6689.",
 };
 
 /** Marca que há JavaScript (html.js), registra a primeira interação (o seletor dos perfis não toma a

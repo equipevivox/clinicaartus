@@ -5,20 +5,21 @@ import { AreaIcon } from "@/components/traco";
 import { careProfiles } from "@/lib/care-profiles";
 import { doctors } from "@/lib/doctors";
 import { IconeWhatsApp } from "@/components/icone-whatsapp";
+import { VideoMembro } from "@/components/video-membro";
 import { linkWhatsApp, mensagemPara } from "@/lib/whatsapp";
 
 /** Um nome por médico no site inteiro: o mesmo da equipe (lib/doctors.ts). */
 const nomeDe = (id: string) => doctors.find((d) => d.id === id)?.name ?? id;
 
-/** Radiografia ilustrativa de cada perfil (geradas pelo Codex; textos dele, como ilustração, CFM). */
-const raioX: Record<string, { arquivo: string; alt: string }> = {
-  cassio: { arquivo: "mao", alt: "Radiografia ilustrativa da mão e do punho, vista de frente" },
-  lucio: { arquivo: "joelho", alt: "Radiografia ilustrativa do joelho, vista de frente" },
-  renam: { arquivo: "quadril", alt: "Radiografia ilustrativa da pelve com os dois quadris, vista de frente" },
-  andre: { arquivo: "coluna", alt: "Radiografia ilustrativa da coluna lombar, vista de lado" },
-  valmir: { arquivo: "ombro", alt: "Radiografia ilustrativa do ombro, vista de frente" },
-  luiz: { arquivo: "cotovelo", alt: "Radiografia ilustrativa do cotovelo dobrado, vista de lado" },
-  ricardo: { arquivo: "pe", alt: "Radiografia ilustrativa do pé e do tornozelo, vista de lado" },
+/** Animação do membro de cada perfil (vídeos enviados pela clínica; texto alternativo como ilustração, CFM). */
+const membro: Record<string, { arquivo: string; alt: string }> = {
+  cassio: { arquivo: "mao-punho", alt: "Ilustração dos ossos da mão e do punho" },
+  lucio: { arquivo: "joelho", alt: "Ilustração dos ossos do joelho" },
+  renam: { arquivo: "quadril", alt: "Ilustração da pelve e dos quadris" },
+  andre: { arquivo: "coluna", alt: "Ilustração da coluna vertebral" },
+  valmir: { arquivo: "ombro-cotovelo", alt: "Ilustração dos ossos do ombro, do braço e do cotovelo" },
+  luiz: { arquivo: "ombro-cotovelo", alt: "Ilustração dos ossos do ombro, do braço e do cotovelo" },
+  ricardo: { arquivo: "pe-tornozelo", alt: "Ilustração dos ossos do pé e do tornozelo" },
 };
 
 /*
@@ -84,7 +85,7 @@ export function CareProfiles() {
     <section className="care-profiles" id="cuidados" aria-labelledby="perfis-titulo" suppressHydrationWarning>
       <CareSelector />
       <div className="container care-layout">
-        <h2 className="care-titulo" id="perfis-titulo" tabIndex={-1}>Perfis dos ortopedistas</h2>
+        <h2 className="care-titulo" id="perfis-titulo" tabIndex={-1}>Perfis dos especialistas</h2>
         <aside className="care-aside">
           <nav className="care-index" aria-label="Escolher ortopedista" data-lenis-prevent>
             <ol>
@@ -123,9 +124,7 @@ export function CareProfiles() {
                   </header>
                   <div className="care-media">
                     <img className="care-photo" src={`/assets/acao-${profile.id}.webp`} alt={nome} width={profile.width} height={profile.height} loading="lazy" decoding="async" />
-                    <figure className="care-xray">
-                      <img src={`/assets/raio-x/raio-x-${raioX[profile.id].arquivo}.webp`} alt={raioX[profile.id].alt} width={960} height={720} loading="lazy" decoding="async" />
-                    </figure>
+                    <VideoMembro arquivo={membro[profile.id].arquivo} alt={membro[profile.id].alt} />
                   </div>
                   <div className="care-copy">
                     <blockquote>{profile.quote}</blockquote>

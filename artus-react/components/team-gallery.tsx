@@ -115,10 +115,7 @@ export function TeamGallery() {
       cardHint=""
       openLabel="Ver formação"
       galleryHint={
-        <>
-          <span className="dica-clique">Clique</span>
-          <span className="dica-toque">Toque</span> na foto de um especialista para ver a formação
-        </>
+        <>Selecione a foto de um especialista para ver sua formação.</>
       }
       backLabel="Ver todos"
       openHeight={620}

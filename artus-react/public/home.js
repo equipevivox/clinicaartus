@@ -74,6 +74,19 @@ function scheduleNavTone() {
     if (darkShare >= navDarkAt) tone = "dark";
     else if (1 - darkShare >= navLightAt) tone = "light";
     if (header.dataset.tone !== tone) header.dataset.tone = tone;
+    // Fora da abertura (hero) a barra encolhe e flutua; volta ao tamanho cheio ao subir até ela.
+    header.toggleAttribute("data-compacto", hero.getBoundingClientRect().bottom < top + height + 24);
+  });
+}
+
+// A entrada da barra e da abertura roda uma vez só (ver .entrada-feita no CSS): termina sozinha
+// ou no primeiro foco, para não recomeçar com blur quando o foco sai da barra depois de um clique.
+{
+  const raiz = document.documentElement;
+  const encerrar = () => raiz.classList.add("entrada-feita");
+  document.addEventListener("focusin", encerrar, { once: true });
+  header.addEventListener("animationend", (e) => {
+    if (e.target === header && e.animationName === "hero-focus") setTimeout(encerrar, 600);
   });
 }
 
@@ -346,3 +359,35 @@ document.querySelectorAll(".care-copy details").forEach((pergunta) => {
     animacao.addEventListener("finish", () => { animacao = null; });
   });
 });
+
+// Vídeo de fundo do hero: é a capa e começa sozinho (autoplay, fonte escolhida pelo <source media>).
+// Pausa fora da tela; o botão do canto pausa e toca (preferência guardada na sessão).
+// Com "reduzir movimento" no sistema, fica parado no primeiro quadro até a pessoa apertar tocar.
+(() => {
+  const video = document.querySelector(".hero-video");
+  const botao = document.querySelector(".hero-pausa");
+  if (!video || !botao) return;
+  video.muted = true; // o React nem sempre grava o atributo muted, e sem ele o navegador bloqueia o play()
+  const reduzir = matchMedia("(prefers-reduced-motion: reduce)");
+  const salvo = sessionStorage.getItem("artus-hero-pausa");
+  let pausado = salvo === null ? reduzir.matches : salvo === "1";
+  let naTela = true;
+  const marcar = () => {
+    botao.setAttribute("aria-pressed", String(pausado));
+    botao.setAttribute("aria-label", pausado ? "Tocar o vídeo de fundo" : "Pausar o vídeo de fundo");
+  };
+  const atualizar = () => {
+    if (naTela && !pausado) video.play().catch(() => {});
+    else video.pause();
+  };
+  botao.addEventListener("click", () => {
+    pausado = !pausado;
+    sessionStorage.setItem("artus-hero-pausa", pausado ? "1" : "0");
+    marcar();
+    atualizar();
+  });
+  if ("IntersectionObserver" in window) new IntersectionObserver(([e]) => { naTela = e.isIntersecting; atualizar(); }).observe(video);
+  marcar();
+  atualizar();
+  botao.hidden = false;
+})();
