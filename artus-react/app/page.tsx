@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- Reuse the optimized local photos and responsive picture sources. */
 import Script from "next/script";
+import { ArtigosSecao } from "@/components/artigos-secao";
 import { Activity, Building2, MapPin, PhoneCall, Users } from "lucide-react";
 import { TeamQuickCard } from "@/components/team-quick-card";
 import { HeroPerspective } from "@/components/ui/container-scroll-animation";
@@ -198,6 +199,8 @@ export default function Home() {
           </div>
         </section>
 
+        <ArtigosSecao />
+
         <section className="section reviews-section" id="avaliacoes" aria-labelledby="reviews-title">
           <div className="container">
             <div className="reviews-head">
@@ -251,6 +254,7 @@ export default function Home() {
       </main>
       <SiteFooter mapa />
       <Script src="/home.js" strategy="afterInteractive" />
+      <Script src="/artigos.js" strategy="afterInteractive" />
       <Script src="/video-player.js" strategy="afterInteractive" />
     </>
   );

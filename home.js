@@ -611,3 +611,102 @@ document.querySelectorAll(".care-copy details").forEach((pergunta) => {
   atualizar();
   botao.hidden = false;
 })();
+
+// Vidro da barra de navegação. O mapa de deslocamento é desenhado no tamanho real da barra (ela
+// muda de largura e de raio ao virar pílula): perto da borda o fundo é puxado para dentro, como numa
+// lente; cada cor desloca um pouco diferente (dispersão); o centro fica parado. backdrop-filter com
+// filtro SVG só funciona no Chromium; nos outros navegadores a barra mantém o desfoque do CSS.
+(() => {
+  const barra = document.querySelector(".site-header");
+  const chromium = !!(navigator.userAgentData && navigator.userAgentData.brands.some((b) => /Chromium/.test(b.brand)));
+  if (!barra || !chromium || matchMedia("(prefers-reduced-transparency: reduce)").matches) return;
+
+  const REFRACAO = 40; // px de deslocamento máximo, na borda
+  const PROFUNDIDADE = 20; // px de borda curva
+  const DISPERSAO = 0.06; // diferença de deslocamento entre vermelho e azul
+  const GELO = 3.5; // desfoque: o fundo aparece, mas sem disputar com o texto
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("aria-hidden", "true");
+  svg.setAttribute("focusable", "false");
+  svg.style.cssText = "position:absolute;width:0;height:0;overflow:hidden";
+  const canal = (nome, escala, matriz) =>
+    `<feDisplacementMap in="gelo" in2="mapa" scale="${escala}" xChannelSelector="R" yChannelSelector="G" result="d${nome}"/>` +
+    `<feColorMatrix in="d${nome}" type="matrix" values="${matriz}" result="${nome}"/>`;
+  svg.innerHTML =
+    `<filter id="vidro-nav" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB" x="0" y="0">` +
+    `<feColorMatrix in="SourceGraphic" type="saturate" values="1.35" result="cor"/>` +
+    `<feGaussianBlur in="cor" stdDeviation="${GELO}" result="gelo"/>` +
+    `<feImage result="mapa" x="0" y="0" preserveAspectRatio="none"/>` +
+    canal("r", REFRACAO * (1 + DISPERSAO), "1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0") +
+    canal("g", REFRACAO, "0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0") +
+    canal("b", REFRACAO * (1 - DISPERSAO), "0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0") +
+    `<feBlend in="r" in2="g" mode="screen" result="rg"/><feBlend in="rg" in2="b" mode="screen"/></filter>`;
+  document.body.append(svg);
+  const filtro = svg.querySelector("filter");
+  const imagem = svg.querySelector("feImage");
+  const tela = document.createElement("canvas");
+  const ctx = tela.getContext("2d");
+  let ultimo = "";
+
+  function desenhar() {
+    const w = Math.round(barra.offsetWidth);
+    const h = Math.round(barra.offsetHeight);
+    if (!w || !h) return;
+    const r = Math.min(parseFloat(getComputedStyle(barra).borderTopLeftRadius) || 0, h / 2, w / 2);
+    const chave = w + "x" + h + "r" + r;
+    if (chave === ultimo) return;
+    ultimo = chave;
+    tela.width = w;
+    tela.height = h;
+    const px = ctx.createImageData(w, h);
+    const d = px.data;
+    const bz = Math.min(PROFUNDIDADE, h / 2);
+    for (let y = 0; y < h; y++) {
+      for (let x = 0; x < w; x++) {
+        // Distância até a borda do retângulo arredondado e a direção da borda mais próxima.
+        const cx = x + .5 - w / 2;
+        const cy = y + .5 - h / 2;
+        const qx = Math.abs(cx) - (w / 2 - r);
+        const qy = Math.abs(cy) - (h / 2 - r);
+        let dist, nx, ny;
+        if (qx > 0 && qy > 0) {
+          const l = Math.hypot(qx, qy) || 1;
+          dist = r - l;
+          nx = (qx / l) * Math.sign(cx);
+          ny = (qy / l) * Math.sign(cy);
+        } else if (qx > qy) {
+          dist = r - qx;
+          nx = Math.sign(cx);
+          ny = 0;
+        } else {
+          dist = r - qy;
+          nx = 0;
+          ny = Math.sign(cy);
+        }
+        const t = Math.max(0, 1 - Math.max(0, dist) / bz);
+        const forca = t * t * (3 - 2 * t); // curva suave: forte na borda, zero no miolo
+        const i = (y * w + x) * 4;
+        d[i] = 128 - nx * forca * 127; // puxa para dentro
+        d[i + 1] = 128 - ny * forca * 127;
+        d[i + 2] = 128;
+        d[i + 3] = 255;
+      }
+    }
+    ctx.putImageData(px, 0, 0);
+    for (const el of [filtro, imagem]) {
+      el.setAttribute("width", w);
+      el.setAttribute("height", h);
+    }
+    imagem.setAttribute("href", tela.toDataURL());
+    barra.classList.add("vidro");
+  }
+
+  let quadro = 0;
+  new ResizeObserver(() => {
+    if (!quadro) quadro = requestAnimationFrame(() => { quadro = 0; desenhar(); });
+  }).observe(barra);
+  // O raio muda na transição para pílula sem mudar o tamanho de uma vez: confere no fim dela.
+  barra.addEventListener("transitionend", desenhar);
+  desenhar();
+})();

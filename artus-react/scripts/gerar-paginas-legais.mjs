@@ -11,29 +11,29 @@ const aqui = path.dirname(fileURLToPath(import.meta.url));
 const raiz = path.resolve(aqui, "..", "..");
 const CR = String.fromCharCode(13);
 
-const ler = (rel) => fs.readFileSync(path.join(raiz, rel), "utf8");
-function escrever(rel, conteudo) {
+export const ler = (rel) => fs.readFileSync(path.join(raiz, rel), "utf8");
+export function escrever(rel, conteudo) {
   const arq = path.join(raiz, rel);
   const crlf = fs.existsSync(arq) && fs.readFileSync(arq, "utf8").includes(CR + "\n");
   fs.writeFileSync(arq, crlf ? conteudo.split("\n").join(CR + "\n") : conteudo);
 }
-const esc = (t) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+export const esc = (t) => t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 const indexHtml = ler("index.html").split(CR + "\n").join("\n");
-const ICONE_TEL = indexHtml.match(/<svg class="icone-tel"[^>]*>.*?<\/svg>/)[0];
+export const ICONE_TEL = indexHtml.match(/<svg class="icone-tel"[^>]*>.*?<\/svg>/)[0];
 const WHATSAPP_PATH = ler("artus-react/components/icone-whatsapp.tsx").match(/ d="([^"]+)"/)[1];
 const SPRITE = `<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="simbolo-whatsapp" viewBox="0 0 24 24"><path fill="currentColor" d="${WHATSAPP_PATH}"/></symbol></svg>`;
 const icone = (corpo, classe = "") => `<svg${classe ? ` class="${classe}"` : ""} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${corpo}</svg>`;
-const SETA = icone('<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>');
+export const SETA = icone('<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>');
 const PINO = icone('<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>');
 const AJUSTES = icone('<path d="M10 5H3"/><path d="M12 19H3"/><path d="M14 3v4"/><path d="M16 17v4"/><path d="M21 12h-9"/><path d="M21 19h-5"/><path d="M21 5h-7"/><path d="M8 10v4"/><path d="M8 12H3"/>');
-const WA = '<svg class="icone-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#simbolo-whatsapp"/></svg>';
+export const WA = '<svg class="icone-whatsapp" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#simbolo-whatsapp"/></svg>';
 // Mensagens e número vêm de lib/whatsapp.ts, a mesma fonte do Next.
 const WHATSAPP = linkWhatsApp(MENSAGEM_PADRAO);
-const WHATSAPP_DUVIDA = linkWhatsApp(MENSAGEM_DUVIDA);
+export const WHATSAPP_DUVIDA = linkWhatsApp(MENSAGEM_DUVIDA);
 const MAPA = "https://www.google.com/maps/search/?api=1&amp;query=Clinica%20Artus%20Ortopedia%20Cuiaba&amp;query_place_id=ChIJpUtfAgCznZMRXrrjG1MNmHU";
 const MAPA_EMBED = "https://www.google.com/maps/embed?origin=mfe&amp;pb=!1m3!2m1!1sCl%C3%ADnica+Artus+Ortopedia,+Av.+Egito+95,+Cuiab%C3%A1+MT!6i16";
-const NOVA_ABA = '<span class="visually-hidden"> (abre em nova aba)</span>';
+export const NOVA_ABA = '<span class="visually-hidden"> (abre em nova aba)</span>';
 const regioes = [["Mão e punho", "cassio"], ["Joelho", "lucio"], ["Quadril", "renam"], ["Coluna", "andre"], ["Ombro e cotovelo", "valmir"], ["Pé e tornozelo", "ricardo"]];
 
 /** Caminhos de cada contexto: na inicial, âncoras; nas internas, a inicial; no 404, tudo a partir da raiz. */
@@ -85,6 +85,7 @@ function rodape(tipo) {
             <li><a href="${ir("clinica")}">Estrutura</a></li>
             <li><a href="${ir("equipe")}">Equipe médica</a></li>
             <li><a href="${ir("especialidades")}">Especialidades</a></li>
+            <li><a href="${tipo === "404" ? "/" : ""}artigos.html">Artigos</a></li>
             <li><a href="${ir("perguntas")}">Perguntas frequentes</a></li>
             <li><a href="${ir("contato")}">Agendamento e endereço</a></li>
           </ul>
@@ -138,7 +139,7 @@ function topo(tipo) {
   </header>`;
 }
 
-function documento({ tipo, titulo, descricao, corpo }) {
+export function documento({ tipo, titulo, descricao, corpo, gerador = "gerar-paginas-legais.mjs: edite os textos em artus-react/lib/paginas-legais.ts", scripts = [] }) {
   const c = caminhos(tipo);
   return `<!doctype html>
 <html lang="pt-BR">
@@ -146,14 +147,15 @@ function documento({ tipo, titulo, descricao, corpo }) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#123e48">${tipo === "404" ? '\n  <meta name="robots" content="noindex">' : ""}
-  <!-- Gerada por artus-react/scripts/gerar-paginas-legais.mjs: edite os textos em artus-react/lib/paginas-legais.ts. -->
+  <!-- Gerada por artus-react/scripts/${gerador}. -->
   <meta name="description" content="${esc(descricao)}">
   <title>${esc(titulo)} | Clínica Artus Ortopedia</title>
   <link rel="icon" href="${c.ativo}favicon.svg" type="image/svg+xml">
   <link rel="preload" href="${c.ativo}assets/instrument-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="${c.ativo}assets/figtree-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="${c.ativo}styles.css">
-  <script src="${c.ativo}assets/site.js" defer></script>
+  <script src="${c.ativo}assets/site.js" defer></script>${scripts.map((src) => `
+  <script src="${c.ativo}${src}" defer></script>`).join("")}
 </head>
 <body id="inicio">
   ${SPRITE}
@@ -184,6 +186,7 @@ ${linhas.map((l) => `                  <tr>${l.map((cel, i) => (i === 0 ? `<th s
   return `<p><button type="button" class="legal-botao" data-abrir-cookies>${AJUSTES}${esc(b.preferencias)}</button></p>`;
 }
 
+function gerar() {
 for (const pagina of paginasLegais) {
   const c = caminhos("doc");
   const corpo = `  <main id="conteudo" class="legal">
@@ -284,3 +287,7 @@ if (!home.includes('<script src="assets/site.js" defer></script>')) {
 }
 escrever("index.html", home);
 console.log("Geradas: privacidade.html, cookies.html, termos.html, 404.html; rodapé do index.html atualizado.");
+}
+
+// Rodado direto gera as páginas; importado (por gerar-artigos.mjs) só empresta a moldura.
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) gerar();
