@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element -- Logos em SVG, já otimizados. */
+/* eslint-disable @next/next/no-html-link-for-pages -- /artigos com carga completa, para o artigos.js rodar. */
 import { MapPin, PhoneCall } from "lucide-react";
 import { MAPA, MAPA_EMBED, TELEFONE, regioes } from "@/lib/contato";
 
@@ -23,6 +24,7 @@ export function SiteFooter({ inicio = "", mapa = false }: { inicio?: string; map
               <li><a href={ir("clinica")}>Estrutura</a></li>
               <li><a href={ir("equipe")}>Equipe médica</a></li>
               <li><a href={ir("especialidades")}>Especialidades</a></li>
+              <li><a href="/artigos">Artigos</a></li>
               <li><a href={ir("perguntas")}>Perguntas frequentes</a></li>
               <li><a href={ir("contato")}>Agendamento e endereço</a></li>
             </ul>
